@@ -47,18 +47,34 @@ There will be two types of users for the WiredCats Scouting Hub: members and adm
 
 ## System Features and Characteristics
 
-- Functional Requirements
-  - X
-- Internal Interfaces
-  - User Interfaces
-    - X
-  - Hardware Interfaces
-- Non-functional Requirements
-  - Performance Requirements
-    - X
-  - Safety Requirements
-  - Security  Requirements
-- Quality Attributes
+3. Specific requirements
+  3.1 External interface requirements
+    3.1.1 User interfaces
+    3.1.2 Hardware interfaces
+    3.1.3 Software interfaces
+    3.1.4 Communications interfaces
+  3.2 System features
+    3.2.1 System Feature 1
+      3.2.1.1 Introduction/Purpose of feature
+      3.2.1.2 Stimulus/Response sequence
+      3.2.1.3 Associated functional requirements
+        3.2.1.3.1 Functional requirement 1
+        .
+        .
+        .
+        3.2.1.3.n Functional requirement n
+    3.2.2 System feature 2
+    .
+    .
+    .
+    3.2.m System feature m
+    .
+    .
+    .
+  3.3 Performance requirements
+  3.4 Design constraints
+  3.5 Software system attributes
+  3.6 Other requirements
 
 ## Availability
 
