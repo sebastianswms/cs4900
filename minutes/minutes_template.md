@@ -34,13 +34,13 @@ Attendance: <!-- Include team members and sponsors. -->
 
 ## Summary
 
-### Progress Made <!-- What have we accomplished since last meeting? >
+### Progress Made <!-- What have we accomplished since last meeting? -->
 
 - Item
 - Item
 - Item
 
-### Next Steps <!-- What do we want to accomplish before the next meeting? >
+### Next Steps <!-- What do we want to accomplish before the next meeting? -->
 
 - Item
 - Item
