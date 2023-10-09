@@ -101,3 +101,11 @@ Contributors: Sebastian Smiley
 Associated Files: [responsibility_tracking.md](/artifacts/responsibility_tracking.md)
 
 ### Week 4: Oct 6th to Oct 13th
+
+#### Rough Page Design
+
+Creation of rough page design and UI in figma.
+
+Contributors: Cullen, Dan, Alex, Joshua.
+
+Associated Files: [Rough page layout.png](/artifacts/Rough page layout.png)
