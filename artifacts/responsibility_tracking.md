@@ -2,14 +2,14 @@
 
 This is a record of who did what during each week of Senior Design.
 
-<!--
+<!-- FORMATTING TEMPLATE
 #### Task Name
 
-Extended task description, if applicable.
+Extended task description, if applicable. If multiple team members contributed in different ways, describe the contribution of each.
 
 Contributors: one or more team member names.
 
-Associated Files: file names within as a markdown link such as [responsibility_tracking.md](/artifacts/responsibility_tracking.md), or N/A if not relevant.
+Associated Files: file names within a markdown link such as [responsibility_tracking.md](/artifacts/responsibility_tracking.md), or N/A if not relevant.
 -->
 
 ## Fall Semester
@@ -108,4 +108,16 @@ Creation of rough page design and UI in figma.
 
 Contributors: Cullen, Dan, Alex, Joshua.
 
-Associated Files: [Rough page layout.png](/artifacts/Rough page layout.png)
+Associated Files: [rough_page_layout.png](/artifacts/rough_page_layout.png)
+
+### Week 5: Oct 13th to Oct 20th
+
+### Week 6: Oct 20th to Oct 27th
+
+### Week 7: Oct 27th to Nov 3rd
+
+### Week 8: Nov 3rd to Nov 10th
+
+### Week 9: Nov 10th to Nov 17th
+
+### Week 10: Nov 17th to Nov 24th
