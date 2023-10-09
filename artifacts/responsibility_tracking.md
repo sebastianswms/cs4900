@@ -8,6 +8,7 @@ This is a record of who did what during each week of Senior Design.
 Extended task description, if applicable.
 
 Contributors: one or more team member names.
+
 Associated Files: file names within as a markdown link such as [responsibility_tracking.md](/artifacts/responsibility_tracking.md), or N/A if not relevant.
 -->
 
