@@ -110,7 +110,23 @@ Contributors: Cullen, Dan, Alex, Joshua.
 
 Associated Files: [rough_page_layout.png](/artifacts/rough_page_layout.png)
 
+#### Minutes
+
+Taking minutes at our fourth group meeting.
+
+Contributors: Sebastian Smiley
+
+Associated Files: [minutes_2023-10-09.md](/minutes/minutes_2023-10-09.md)
+
 ### Week 5: Oct 13th to Oct 20th
+
+#### Minutes
+
+Taking minutes at our fifth group meeting.
+
+Contributors: Sebastian Smiley
+
+Associated Files: [minutes_2023-10-16.md](/minutes/minutes_2023-10-16.md)
 
 ### Week 6: Oct 20th to Oct 27th
 
