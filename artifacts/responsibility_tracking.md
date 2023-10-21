@@ -128,6 +128,12 @@ Contributors: Sebastian Smiley
 
 Associated Files: [minutes_2023-10-16.md](/minutes/minutes_2023-10-16.md)
 
+#### Learning Electron
+
+Spend time working throught Electron tutorial on Electron website and ensure Electron works on all devices
+
+Contributors: Cullen Armstrong,
+
 ### Week 6: Oct 20th to Oct 27th
 
 ### Week 7: Oct 27th to Nov 3rd
