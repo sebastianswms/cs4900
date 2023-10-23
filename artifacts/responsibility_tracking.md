@@ -136,6 +136,22 @@ Contributors: Cullen Armstrong,
 
 ### Week 6: Oct 20th to Oct 27th
 
+### Minutes
+
+Taking minutes at our sixth group meeting
+
+Contributors: Allie Kalhorn
+
+Associated Files: [minutes_2023-10-23](/minutes/minutes_2023-10-23.md)
+
+#### Electron App Test
+
+Creating and pushing the Hello Wiredcats Electron test, gitignore file , and README for the test app
+
+Contributors: Allie Kalhorn
+
+Associated Files: [test app](/testapp/), [README](/testapp/README.md)
+
 ### Week 7: Oct 27th to Nov 3rd
 
 ### Week 8: Nov 3rd to Nov 10th

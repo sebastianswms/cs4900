@@ -1,19 +1,29 @@
 # Setup
 
-## Install npm
+## Debian Based Systems
 
-On Debian based machines run the following:
+### Install npm
 
 `sudo apt install npm`
 
-## Install Electron
-
-Once npm is installed run the following: 
+### Install Electron
 
 `npm install electron --save-dev`
 
-# Run the program
-
-To run the program use the following command: 
+### Run the program
 
 `npm run start`
+
+## Windows Based Systems
+
+### Prerequisites
+
+Node and npm must be installed
+
+### Install
+
+`npm i`
+
+### Run
+
+`npm start`
