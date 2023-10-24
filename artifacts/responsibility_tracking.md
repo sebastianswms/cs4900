@@ -106,7 +106,7 @@ Associated Files: [responsibility_tracking.md](/artifacts/responsibility_trackin
 
 Creation of rough page design and UI in figma.
 
-Contributors: Cullen, Dan, Alex, Joshua.
+Contributors: Cullen Armstrong, Daniel Wilkins, Alex Fitzsimmons, Joshua Vattiprolu
 
 Associated Files: [rough_page_layout.png](/artifacts/rough_page_layout.png)
 
@@ -130,13 +130,15 @@ Associated Files: [minutes_2023-10-16.md](/minutes/minutes_2023-10-16.md)
 
 #### Learning Electron
 
-Spend time working throught Electron tutorial on Electron website and ensure Electron works on all devices
+Spend time working throught Electron tutorial on Electron website and ensure Electron works on all devices.
 
-Contributors: Cullen Armstrong,
+Contributors: Cullen Armstrong, Sebastian Smiley, Allie Kalhorn
+
+Associated Files: N/A
 
 ### Week 6: Oct 20th to Oct 27th
 
-### Minutes
+#### Minutes
 
 Taking minutes at our sixth group meeting
 
@@ -144,9 +146,17 @@ Contributors: Allie Kalhorn
 
 Associated Files: [minutes_2023-10-23](/minutes/minutes_2023-10-23.md)
 
+#### Sample Data
+
+Obtaining and pushing a selection of sample data for the 2023 FIRST robotics season, to be used during initial testing stages of the app.
+
+Contributors: Sebastian Smiley
+
+Associated Files: [/artifacts/draft_ui](/artifacts/draft_ui/)
+
 #### Electron App Test
 
-Creating and pushing the Hello Wiredcats Electron test, gitignore file , and README for the test app
+Creating and pushing the Hello Wiredcats Electron test, gitignore file , and README for the test app.
 
 Contributors: Allie Kalhorn
 
