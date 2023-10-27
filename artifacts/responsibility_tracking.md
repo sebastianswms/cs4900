@@ -162,6 +162,14 @@ Contributors: Allie Kalhorn
 
 Associated Files: [test app](/testapp/), [README](/testapp/README.md)
 
+#### FIRST API First Steps
+
+Created an API Key for the FIRST API; perused the FIRST API documentation; used it to ping the FIRST API in Postman.
+
+Contributors: Sebastian Smiley, Allie Kalhorn
+
+Associated Files: N/A
+
 ### Week 7: Oct 27th to Nov 3rd
 
 ### Week 8: Nov 3rd to Nov 10th
