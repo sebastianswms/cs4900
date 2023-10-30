@@ -172,6 +172,14 @@ Associated Files: N/A
 
 ### Week 7: Oct 27th to Nov 3rd
 
+#### Minutes
+
+Taking minutes at our seventh group meeting
+
+Contributors: Allie Kalhorn
+
+Associated Files: [minutes_2023-10-30](/minutes/minutes_2023-10-30.md)
+
 ### Week 8: Nov 3rd to Nov 10th
 
 ### Week 9: Nov 10th to Nov 17th
