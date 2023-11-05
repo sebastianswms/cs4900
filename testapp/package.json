@@ -11,6 +11,7 @@
     "license": "MIT",
     "devDependencies": {
         "electron": "^23.3.13",
-        "axios": "^1.6.0"
+        "axios": "^1.6.0",
+        "dotenv": "^16.3.1"
     }
 }
