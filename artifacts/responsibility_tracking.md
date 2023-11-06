@@ -180,6 +180,14 @@ Contributors: Allie Kalhorn
 
 Associated Files: [minutes_2023-10-30](/minutes/minutes_2023-10-30.md)
 
+#### Implement FIRST API Calls
+
+Utilize a FIRST API key to make calls to the FIRST API to retrieve data on scores for historical matches
+
+Contributors: Sebastian Smiley
+
+Associated Files: [preload.js](/testapp/preload.js), [api-request.html](/testapp/api-request.html), [renderer.js](/testapp/renderer.js)
+
 ### Week 8: Nov 3rd to Nov 10th
 
 ### Minutes
@@ -190,13 +198,29 @@ Contributors: Allie Kalhorn
 
 Associated Files [minutes_2023-11-06](/minutes/minutes_2023-11-06.md)
 
-### API Table example
+#### Combine FIRST API Calls
+
+Making multiple API calls to the FIRST API, then matching them up based on primary keys, preparing for combining into a database object
+
+Contributors: Sebastian Smiley
+
+Associated Files: [main.js](/testapp/main.js), [api-request.html](/testapp/api-request.html), [renderer.js](/testapp/renderer.js)
+
+#### API Table example
 
 Created example table as a start for what we would like API to end up looking like
 
 Contributors: Allie Kalhorn
 
 Associated Files [table.html](/testapp/table.html)
+
+#### Implement the Use of a .env file
+
+Use the `dotenv` package to implement the ability to store sensitive API credentials in a `.env` file.
+
+Contributors: Sebastian Smiley
+
+Associated Files: [renderer.js](/testapp/renderer.js)
 
 ### Week 9: Nov 10th to Nov 17th
 
