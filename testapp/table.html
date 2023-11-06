@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<div id="table-container"></div>
+
+<script>
+    // Sample JSON data
+    const jsonData = [
+        {
+            "Schedule": [
+                {
+                    "description": "Qualification 1",
+                    "startTime": "2022-03-11T11:00:00",
+                    "matchNumber": 1,
+                    "field": "Primary",
+                    "tournamentLevel": "Qualification",
+                    "teams": [
+                        {"teamNumber": 5623, "station": "Red1", "surrogate": false},
+                        {"teamNumber": 4956, "station": "Red2", "surrogate": false},
+                        {"teamNumber": 7658, "station": "Red3", "surrogate": false},
+                        {"teamNumber": 5152, "station": "Blue1", "surrogate": false},
+                        {"teamNumber": 4776, "station": "Blue2", "surrogate": false},
+                        {"teamNumber": 6150, "station": "Blue3", "surrogate": false}
+                    ],
+                    "alliances": [
+                        {
+                            "alliance": "Blue",
+                            "taxiRobot1": "Yes",
+                            "endgameRobot1": "High",
+                            "taxiRobot2": "Yes",
+                            "endgameRobot2": "None",
+                            "taxiRobot3": "No",
+                            "endgameRobot3": "None",
+                            "autoCargoLowerNear": 0,
+                            "autoCargoLowerFar": 0,
+                            "autoCargoLowerBlue": 0,
+                            "autoCargoLowerRed": 1,
+                            "autoCargoUpperNear": 0,
+                            "autoCargoUpperFar": 0,
+                            "autoCargoUpperBlue": 0,
+                            "autoCargoUpperRed": 0,
+                            "autoCargoTotal": 1,
+                            "teleopCargoLowerNear": 0,
+                            "teleopCargoLowerFar": 1,
+                            "teleopCargoLowerBlue": 0,
+                            "teleopCargoLowerRed": 1,
+                            "teleopCargoUpperNear": 1,
+                            "teleopCargoUpperFar": 2,
+                            "teleopCargoUpperBlue": 1,
+                            "teleopCargoUpperRed": 0,
+                            "teleopCargoTotal": 6,
+                            "matchCargoTotal": 7,
+                            "autoTaxiPoints": 4,
+                            "autoPoints": 6,
+                            "autoCargoPoints": 2,
+                            "quintetAchieved": false,
+                            "teleopPoints": 20,
+                            "teleopCargoPoints": 10,
+                            "endgamePoints": 10,
+                            "cargoBonusRankingPoint": false,
+                            "hangarBonusRankingPoint": false,
+                            "foulCount": 2,
+                            "techFoulCount": 0,
+                            "adjustPoints": 0,
+                            "foulPoints": 0,
+                            "rp": 0,
+                            "totalPoints": 26
+                        },
+                        {
+                            "alliance": "Red",
+                            "taxiRobot1": "Yes",
+                            "endgameRobot1": "None",
+                            "taxiRobot2": "Yes",
+                            "endgameRobot2": "None",
+                            "taxiRobot3": "Yes",
+                            "endgameRobot3": "Traversal",
+                            "autoCargoLowerNear": 1,
+                            "autoCargoLowerFar": 0,
+                            "autoCargoLowerBlue": 0,
+                            "autoCargoLowerRed": 0,
+                            "autoCargoUpperNear": 0,
+                            "autoCargoUpperFar": 0,
+                            "autoCargoUpperBlue": 1,
+                            "autoCargoUpperRed": 0,
+                            "autoCargoTotal": 2,
+                            "teleopCargoLowerNear": 2,
+                            "teleopCargoLowerFar": 2,
+                            "teleopCargoLowerBlue": 0,
+                            "teleopCargoLowerRed": 0,
+                            "teleopCargoUpperNear": 0,
+                            "teleopCargoUpperFar": 0,
+                            "teleopCargoUpperBlue": 0,
+                            "teleopCargoUpperRed": 0,
+                            "teleopCargoTotal": 4,
+                            "matchCargoTotal": 6,
+                            "autoTaxiPoints": 6,
+                            "autoPoints": 12,
+                            "autoCargoPoints": 6,
+                            "quintetAchieved": false,
+                            "teleopPoints": 19,
+                            "teleopCargoPoints": 4,
+                            "endgamePoints": 15,
+                            "cargoBonusRankingPoint": false,
+                            "hangarBonusRankingPoint": false,
+                            "foulCount": 0,
+                            "techFoulCount": 0,
+                            "adjustPoints": 0,
+                            "foulPoints": 8,
+                            "rp": 2,
+                            "totalPoints": 39
+                        }
+                    ]
+                },
+                {
+                    "description": "Qualification 2",
+                    "startTime": "2022-03-11T11:09:00",
+                    "matchNumber": 2,
+                    "field": "Primary",
+                    "tournamentLevel": "Qualification",
+                    "teams": [
+                        {"teamNumber": 5144, "station": "Red1", "surrogate": false},
+                        {"teamNumber": 4327, "station": "Red2", "surrogate": false},
+                        {"teamNumber": 7203, "station": "Red3", "surrogate": false},
+                        {"teamNumber": 6002, "station": "Blue1", "surrogate": false},
+                        {"teamNumber": 85, "station": "Blue2", "surrogate": false},
+                        {"teamNumber": 2771, "station": "Blue3", "surrogate": false}
+                    ],
+                    "alliances": [
+                        {
+                            "alliance": "Blue",
+                            "taxiRobot1": "Yes",
+                            "endgameRobot1": "None",
+                            "taxiRobot2": "Yes",
+                            "endgameRobot2": "Mid",
+                            "taxiRobot3": "Yes",
+                            "endgameRobot3": "None",
+                            "autoCargoLowerNear": 0,
+                            "autoCargoLowerFar": 1,
+                            "autoCargoLowerBlue": 0,
+                            "autoCargoLowerRed": 0,
+                            "autoCargoUpperNear": 0,
+                            "autoCargoUpperFar": 1,
+                            "autoCargoUpperBlue": 0,
+                            "autoCargoUpperRed": 0,
+                            "autoCargoTotal": 2,
+                            "teleopCargoLowerNear": 0,
+                            "teleopCargoLowerFar": 2,
+                            "teleopCargoLowerBlue": 1,
+                            "teleopCargoLowerRed": 7,
+                            "teleopCargoUpperNear": 2,
+                            "teleopCargoUpperFar": 1,
+                            "teleopCargoUpperBlue": 1,
+                            "teleopCargoUpperRed": 0,
+                            "teleopCargoTotal": 14,
+                            "matchCargoTotal": 16,
+                            "autoTaxiPoints": 6,
+                            "autoPoints": 12,
+                            "autoCargoPoints": 6,
+                            "quintetAchieved": false,
+                            "teleopPoints": 24,
+                            "teleopCargoPoints": 18,
+                            "endgamePoints": 6,
+                            "cargoBonusRankingPoint": false,
+                            "hangarBonusRankingPoint": false,
+                            "foulCount": 0,
+                            "techFoulCount": 0,
+                            "adjustPoints": 0,
+                            "foulPoints": 4,
+                            "rp": 2,
+                            "totalPoints": 40
+                        },
+                        {
+                            "alliance": "Red",
+                            "taxiRobot1": "No",
+                            "endgameRobot1": "Mid",
+                            "taxiRobot2": "Yes",
+                            "endgameRobot2": "Mid",
+                            "taxiRobot3": "No",
+                            "endgameRobot3": "None",
+                            "autoCargoLowerNear": 1,
+                            "autoCargoLowerFar": 0,
+                            "autoCargoLowerBlue": 1,
+                            "autoCargoLowerRed": 0,
+                            "autoCargoUpperNear": 0,
+                            "autoCargoUpperFar": 0,
+                            "autoCargoUpperBlue": 0,
+                            "autoCargoUpperRed": 0,
+                            "autoCargoTotal": 2,
+                            "teleopCargoLowerNear": 0,
+                            "teleopCargoLowerFar": 0,
+                            "teleopCargoLowerBlue": 0,
+                            "teleopCargoLowerRed": 0,
+                            "teleopCargoUpperNear": 0,
+                            "teleopCargoUpperFar": 0,
+                            "teleopCargoUpperBlue": 2,
+                            "teleopCargoUpperRed": 0,
+                            "teleopCargoTotal": 2,
+                            "matchCargoTotal": 4,
+                            "autoTaxiPoints": 2,
+                            "autoPoints": 6,
+                            "autoCargoPoints": 4,
+                            "quintetAchieved": false,
+                            "teleopPoints": 16,
+                            "teleopCargoPoints": 4,
+                            "endgamePoints": 12,
+                            "cargoBonusRankingPoint": false,
+                            "hangarBonusRankingPoint": false,
+                            "foulCount": 1,
+                            "techFoulCount": 0,
+                            "adjustPoints": 0,
+                            "foulPoints": 0,
+                            "rp": 0,
+                            "totalPoints": 22
+                        }
+                    ]
+                }
+            ]
+        }
+    ];
+
+    // Function to convert JSON to HTML table
+   // Function to convert JSON to HTML table with teams and alliances
+function jsonToTable(jsonData) {
+    let tableHTML = '<table><tr><th>Description</th><th>Start Time</th><th>Match Number</th><th>Field</th><th>Tournament Level</th><th>Teams</th><th>Alliances</th></tr>';
+
+    for (const scheduleItem of jsonData[0].Schedule) {
+        tableHTML += '<tr>';
+        tableHTML += `<td>${scheduleItem.description}</td>`;
+        tableHTML += `<td>${scheduleItem.startTime}</td>`;
+        tableHTML += `<td>${scheduleItem.matchNumber}</td>`;
+        tableHTML += `<td>${scheduleItem.field}</td>`;
+        tableHTML += `<td>${scheduleItem.tournamentLevel}</td>`;
+
+        // Create a list of teams
+        let teamsHTML = '<ul>';
+        for (const team of scheduleItem.teams) {
+            teamsHTML += `<li>Team ${team.teamNumber} (${team.station})</li>`;
+        }
+        teamsHTML += '</ul>';
+        tableHTML += `<td>${teamsHTML}</td>`;
+
+        // Create a list of alliances
+        let alliancesHTML = '<ul>';
+        for (const alliance of scheduleItem.alliances) {
+            alliancesHTML += `<li>Alliance: ${alliance.alliance}, Points: ${alliance.totalPoints}</li>`;
+        }
+        alliancesHTML += '</ul>';
+        tableHTML += `<td>${alliancesHTML}</td>`;
+
+        tableHTML += '</tr>';
+    }
+
+    tableHTML += '</table>';
+    return tableHTML;
+}
+
+
+    const tableContainer = document.getElementById('table-container');
+    tableContainer.innerHTML = jsonToTable(jsonData);
+
+</script>
+</body>
+</html>

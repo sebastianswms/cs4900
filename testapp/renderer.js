@@ -30,7 +30,7 @@ apiButton.addEventListener('click', async () => {
     }
   }
 
-  resultDiv.innerHTML = JSON.stringify(schedule, null, 2);
+  resultDiv.innerHTML = JSON.stringify(schedule);
 
 });
 

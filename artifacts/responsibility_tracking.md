@@ -182,6 +182,22 @@ Associated Files: [minutes_2023-10-30](/minutes/minutes_2023-10-30.md)
 
 ### Week 8: Nov 3rd to Nov 10th
 
+### Minutes
+
+Taking minutes at our eighth group meeting
+
+Contributors: Allie Kalhorn
+
+Associated Files [minutes_2023-11-06](/minutes/minutes_2023-11-06.md)
+
+### API Table example
+
+Created example table as a start for what we would like API to end up looking like
+
+Contributors: Allie Kalhorn
+
+Associated Files [table.html](/testapp/table.html)
+
 ### Week 9: Nov 10th to Nov 17th
 
 ### Week 10: Nov 17th to Nov 24th
