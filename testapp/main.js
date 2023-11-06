@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path')
 const axios = require('axios')
+const dotenv = require('dotenv').config()
 
 const createWindow = () => {
   const win = new BrowserWindow({

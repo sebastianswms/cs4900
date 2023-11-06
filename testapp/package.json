@@ -10,7 +10,12 @@
     "author": "Jane Doe",
     "license": "MIT",
     "devDependencies": {
-        "electron": "^23.3.13",
-        "axios": "^1.6.0"
+        "axios": "^1.6.0",
+        "dotenv": "^16.3.1",
+        "electron": "^23.3.13"
+    },
+    "dependencies": {
+        "html-tablify": "^2.0.4",
+        "node-json2html": "^2.2.3"
     }
 }
