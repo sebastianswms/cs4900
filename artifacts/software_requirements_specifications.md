@@ -58,68 +58,121 @@
 
 # 3. Specific requirements
 
-# 3.1 External Interfaces
+## 3.1 Match Reports
 
-# 3.1.1 Landing Page / Import Data Page
+The software shall produce Match reports.
 
-# 3.1.2 Validation Page
+### 3.1.1
 
-# 3.1.3 Match Report Page
+Match reports shall include offensive power rating.
 
-# 3.1.4 Alliance Selection Page
+### 3.1.2
 
-# 3.1.5 Create Report Layout Page
+Match reports shall rank teams based on desired and adjustable parameters.
 
-# 3.1.6 Create Alliance Selection Table Page
+### 3.1.3
 
-# 3.1.7 Settings API Import Page
+Match reports shall be printable in black and white.
 
-# 3.1.8 Settings CSV Import Page
+### 3.1.4
 
-# 3.2 Functions
+Match reports shall be printable on standard paper size.
 
-    System features:
+### 3.1.5
 
-# 3.2.1 Match Reports
+Match reports shall display data in tables, graphs, and charts.
 
-    The software shall produce reports calculating Offensive Power Rating.
+#### 3.1.5.1
 
-# 3.2.2 Create Reports
+The displayed data shall be configurable. 
 
-    The software shall produce reports ranking teams based on desired parameters.
+## 3.2 Alliance Selection Reports
 
-# 3.2.3 Print Reports
+The software shall produce Alliance Selection reports.
 
-    The software shall be able to print out reports in black and white.
+### 3.2.1
 
-# 3.2.3 Import FRC Data
+Alliance Selection reports shall include offensive power rating.
 
-    Users shall be able to import real time scoring data from the First Robotics API.
+### 3.2.2
 
-# 3.2.3 Import CSV Data (Google Sheets)
+Alliance Selection reports shall rank teams based on desired parameters.
 
-    Users shall be able to import data from Google Sheets.
+### 3.2.3
 
-# 3.2.4 Edit/Validate Data
+Alliance Selection reports shall remove teams that have been selected from the master list.
 
-    Users shall be able to edit and validate data after synchronization.
+### 3.2.4
 
-# 3.3 Performance requirements
+Alliance Selection reports shall group teams that have been selected into their alliance.
 
-    The software will run on a single laptop.
+### 3.2.5
 
-    Note: Minimum requirements by operating system:
-    - OS X 10.9
-    - Windows 7
-    - Linux Fedora 21/Debian 8/Ubuntu 12.04
+Alliance Selection shall allow editing of all tables.
 
-# 3.4 Logical database requirements
+## 3.3 FRC API Data Collection
 
-# 3.5 Design constraints
+The software shall access the FRC API to retrieve data.
 
-    The software will use the data generated from AppSheet
+### 3.3.1
 
-# 3.6 Software system attributes
+Retrieved data shall include event data.
+
+### 3.3.2
+
+Retrieved data shall include team data.
+
+### 3.3.3
+
+Retrieved data shall be accessed several times per event.
+
+### 3.3.4
+
+Users shall have the ability to specify which data is retrieved. 
+
+## 3.4 AppSheet Data Collection
+
+The software shall access information collected with AppSheet. 
+
+### 3.4.1
+
+The data will be imported as a CSV.
+
+### 3.4.2
+
+Retrieved data will be accessed several times per event.
+
+### 3.4.3
+
+Users shall have the ability to specify which CSV is retrieved. 
+
+### 3.4.4
+
+The data collected will not be shared outside the team or the software. 
+
+## 3.5 Data Combination
+
+The software shall combine data from the API and AppSheet.
+
+### 3.5.1
+
+Users shall have the ability to view, validate, and edit data after synchronization.
+
+## 3.6 Offline Operation
+
+The software will be able to operate when cell service and Wi-Fi are not available.
+
+### 3.6.1
+
+Importing data will be handled by leaving the outage area.
+
+## 3.7 Running environment
+
+The software shall run on a laptop.
+
+### 3.7.1
+
+The software shall run on both windows and linux.
 
 # 5.3.6.1 Reliability
 
@@ -135,7 +188,7 @@
 
 # 5.3.6.5 Portability
 
-# 3.7 Organizing the specific requirements
+<!-- # 3.7 Organizing the specific requirements
 
 # 3.7.1 System mode
 
@@ -151,4 +204,4 @@
 
 # 3.7.7 Functional hierarchy
 
-# 3.8 Additional comments
+# 3.8 Additional comments -->
