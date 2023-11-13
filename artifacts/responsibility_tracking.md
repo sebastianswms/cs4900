@@ -246,6 +246,8 @@ Work through multiple draft versions to create an updated requirements document 
 
 Contributors: Cullen Armstrong, Daniel Wilkins, Sebastian Smiley
 
+Associated Files: [software_requirements_specifications.md](/artifacts/software_requirements_specifications.md)
+
 ### Week 10: Nov 17th to Nov 24th
 
 ### Week 11: Nov 24th to Dec 2nd
