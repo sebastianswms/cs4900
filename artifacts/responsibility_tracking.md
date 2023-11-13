@@ -224,4 +224,30 @@ Associated Files: [renderer.js](/testapp/renderer.js)
 
 ### Week 9: Nov 10th to Nov 17th
 
+### Minutes
+
+Taking minutes at our ninth group meeting
+
+Contributors: Allie Kalhorn
+
+Associated Files [minutes_2023-11-13](/minutes/minutes_2023-11-13.md)
+
+#### Create Attendance Sheet
+
+Create a detailed attendance sheet. Sheet created by Daniel Wilkins. Each individual was responsible for ensuring their attendance is accurate to-date.
+
+Contributors: Alex Fitzsimmons, Allie Kalhorn, Cullen Armstrong, Daniel Wilkins, Joshua Vattiprolu, Sebastian Smiley
+
+Associated Files: TODO
+
+#### Update Requirements
+
+Work through multiple draft versions to create an updated requirements document that clarifies and accounts for all current requirements.
+
+Contributors: Cullen Armstrong, Daniel Wilkins, Sebastian Smiley
+
 ### Week 10: Nov 17th to Nov 24th
+
+### Week 11: Nov 24th to Dec 2nd
+
+### Week 12: Dec 2nd to Dec 9th
