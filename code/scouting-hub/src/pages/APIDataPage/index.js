@@ -63,20 +63,26 @@ function APIDataPage() {
               Match Number: {element.matchNumber} Level: {element.matchLevel}
             </h3>
             <table style={{ border: "1px solid" }}>
-              <tr>
-                {headers.map((header) => (
-                  <th style={{ border: "1px solid" }}>{header}</th>
-                ))}
-              </tr>
-              {element.alliances.map((e) => {
-                return (
-                  <tr>
-                    {headers.map((header) => (
-                      <td style={{ border: "1px solid" }}>{e[header]}</td>
-                    ))}
-                  </tr>
-                );
-              })}
+              <tbody>
+                <tr>
+                  {headers.map((header, index) => (
+                    <th key={index} style={{ border: "1px solid" }}>
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+                {element.alliances.map((e, index) => {
+                  return (
+                    <tr key={index}>
+                      {headers.map((header, index) => (
+                        <td key={index} style={{ border: "1px solid" }}>
+                          {e[header]}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })}
+              </tbody>
             </table>
           </div>
         );
