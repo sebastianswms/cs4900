@@ -250,6 +250,14 @@ Associated Files: [software_requirements_specifications.md](/artifacts/software_
 
 ### Week 10: Nov 17th to Nov 24th
 
+### Minutes
+
+Taking minutes at our 10th group meeting
+
+Contributors: Allie Kalhorn
+
+Associated Files [minutes_2023-11-20](/minutes/minutes_2023-11-20.md)
+
 ### Week 11: Nov 24th to Dec 2nd
 
 ### Week 12: Dec 2nd to Dec 9th
