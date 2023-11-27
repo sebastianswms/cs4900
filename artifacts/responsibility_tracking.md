@@ -260,4 +260,12 @@ Associated Files [minutes_2023-11-20](/minutes/minutes_2023-11-20.md)
 
 ### Week 11: Nov 24th to Dec 2nd
 
+### Minutes
+
+Taking minutes at our 11th group meeting
+
+Contributors: Sebastian Smiley
+
+Associated Files [minutes_2023-11-27](/minutes/minutes_2023-11-27.md)
+
 ### Week 12: Dec 2nd to Dec 9th
