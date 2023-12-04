@@ -196,7 +196,7 @@ Taking minutes at our eighth group meeting
 
 Contributors: Allie Kalhorn
 
-Associated Files [minutes_2023-11-06](/minutes/minutes_2023-11-06.md)
+Associated Files: [minutes_2023-11-06](/minutes/minutes_2023-11-06.md)
 
 #### Combine FIRST API Calls
 
@@ -212,7 +212,7 @@ Created example table as a start for what we would like API to end up looking li
 
 Contributors: Allie Kalhorn
 
-Associated Files [table.html](/testapp/table.html)
+Associated Files: [table.html](/testapp/table.html)
 
 #### Implement the Use of a .env file
 
@@ -230,7 +230,7 @@ Taking minutes at our ninth group meeting
 
 Contributors: Allie Kalhorn
 
-Associated Files [minutes_2023-11-13](/minutes/minutes_2023-11-13.md)
+Associated Files: [minutes_2023-11-13](/minutes/minutes_2023-11-13.md)
 
 #### Create Attendance Sheet
 
@@ -238,7 +238,7 @@ Create a detailed attendance sheet. Sheet created by Daniel Wilkins. Each indivi
 
 Contributors: Alex Fitzsimmons, Allie Kalhorn, Cullen Armstrong, Daniel Wilkins, Joshua Vattiprolu, Sebastian Smiley
 
-Associated Files: TODO
+Associated Files: [attendance.md](/attendance/attendance.md)
 
 #### Update Requirements
 
@@ -250,22 +250,30 @@ Associated Files: [software_requirements_specifications.md](/artifacts/software_
 
 ### Week 10: Nov 17th to Nov 24th
 
-### Minutes
+#### Minutes
 
 Taking minutes at our 10th group meeting
 
 Contributors: Allie Kalhorn
 
-Associated Files [minutes_2023-11-20](/minutes/minutes_2023-11-20.md)
+Associated Files: [minutes_2023-11-20](/minutes/minutes_2023-11-20.md)
 
 ### Week 11: Nov 24th to Dec 2nd
 
-### Minutes
+#### Minutes
 
 Taking minutes at our 11th group meeting
 
 Contributors: Sebastian Smiley
 
-Associated Files [minutes_2023-11-27](/minutes/minutes_2023-11-27.md)
+Associated Files: [minutes_2023-11-27](/minutes/minutes_2023-11-27.md)
 
 ### Week 12: Dec 2nd to Dec 9th
+
+#### Create a Sequence Diagram for Fetching API Data
+
+Created a sequence diagram showing the process for fetching API data from the FIRST API.
+
+Contributors: Sebastian Smiley
+
+Associated Files: TODO
