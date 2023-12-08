@@ -5,16 +5,16 @@ Senior design project for the 5675 WiredCats.
 ## Contents:
 
 - [/artifacts](/artifacts/): Tangible by-products produced during software development.
-  - [/artifacts/draft_ui](/artifacts/draft_ui/): drafts of how the user interface might look.
-  - [/artifacts/flowcharts](/artifacts/flowcharts/): flowcharts of software requirements.
-  - [/artifacts/previous_years](/artifacts/previous_years/): examples of the team's previous process.
-  - [/artifacts/sample_data](/artifacts/sample_data/): example data from AppSheet collected by the team.
-  - [/artifacts/sequence_diagrams](/artifacts/sequence_diagrams/): Sequence diagrams of key requirements.
+  - [/draft_ui](/artifacts/draft_ui/): drafts of how the user interface might look.
+  - [/flowcharts](/artifacts/flowcharts/): flowcharts of software requirements.
+  - [/previous_years](/artifacts/previous_years/): examples of the team's previous process.
+  - [/sample_data](/artifacts/sample_data/): example data from AppSheet collected by the team.
+  - [/sequence_diagrams](/artifacts/sequence_diagrams/): Sequence diagrams of key requirements.
 - [/attendance](/attendance/): Group attendance for the group meetings and in-person class.
 - [/minutes](/minutes/): Records of team meetings and meetings with our sponsor.
 - [/code](/code/): all code relating to the program
-  - [/code/scouting-hub](/code/scouting-hub/): production version of application
-  - [/code/testapp](/code/testapp/): older code base without electron/react
+  - [/scouting-hub](/code/scouting-hub/): production version of application
+  - [/testapp](/code/testapp/): older code base without electron/react
 
 ## Team members:
 
