@@ -24,4 +24,4 @@
 | Group    | 11/27/2023 | Monday    |        x         |               |        x         |       x        |         x         |        x         |
 | Class    | 12/1/2023  | Friday    |        x         |       x       |        x         |       x        |                   |        x         |
 | Group    | 12/4/2023  | Monday    |                  |       x       |        x         |       x        |                   |        x         |
-| Class    | 12/8/2023  | Friday    |                  |               |                  |                |                   |                  |
+| Class    | 12/8/2023  | Friday    |        x         |       x       |        x         |       x        |                   |        x         |
