@@ -38,8 +38,8 @@ Senior design project for the 5675 WiredCats.
 
 - [draw.io](https://app.diagrams.net/)
 
-* you don't have to select a place to save diagrams,
-* select "Decide later" when prompted on loading screen.
+_you don't have to select a place to save diagrams,_
+_select "Decide later" when prompted on loading screen._
 
 ## Online flowchart and Notes
 
