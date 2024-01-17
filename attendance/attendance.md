@@ -26,8 +26,8 @@
 | Group    | 12/4/2023  | Monday    |                  |       x       |        x         |       x        |                   |        x         |
 | Class    | 12/8/2023  | Friday    |        x         |       x       |        x         |       x        |                   |        x         |
 | Class    | 1/9/2024   | Tuesday   |        x         |       x       |        x         |       x        |                   |        x         |
-| Class    | 1/11/2024  | Thursday  |                  |               |                  |                |                   |                  |
-| Class    | 1/16/2024  | Tuesday   |                  |               |                  |                |                   |                  |
+| Class    | 1/11/2024  | Thursday  |                  |               |        x         |       x        |                   |        x         |
+| Client   | 1/17/2024  | Wednesday |                  |       x       |        x         |       x        |                   |        x         |
 | Class    | 1/18/2024  | Thursday  |                  |               |                  |                |                   |                  |
 | Class    | 1/23/2024  | Tuesday   |                  |               |                  |                |                   |                  |
 | Class    | 1/25/2024  | Thursday  |                  |               |                  |                |                   |                  |
