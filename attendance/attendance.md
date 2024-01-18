@@ -28,7 +28,7 @@
 | Class    | 1/9/2024   | Tuesday   |        x         |       x       |        x         |       x        |                   |        x         |
 | Class    | 1/11/2024  | Thursday  |                  |               |        x         |       x        |                   |        x         |
 | Client   | 1/17/2024  | Wednesday |                  |       x       |        x         |       x        |                   |        x         |
-| Class    | 1/18/2024  | Thursday  |                  |               |                  |                |                   |                  |
+| Class    | 1/18/2024  | Thursday  |        x         |       x       |        x         |       x        |         x         |        x         |
 | Class    | 1/23/2024  | Tuesday   |                  |               |                  |                |                   |                  |
 | Class    | 1/25/2024  | Thursday  |                  |               |                  |                |                   |                  |
 | Class    | 1/30/2024  | Tuesday   |                  |               |                  |                |                   |                  |
