@@ -29,12 +29,9 @@
 | Class    | 1/11/2024  | Thursday  |                  |               |        x         |       x        |                   |        x         |
 | Client   | 1/17/2024  | Wednesday |                  |       x       |        x         |       x        |                   |        x         |
 | Class    | 1/18/2024  | Thursday  |        x         |       x       |        x         |       x        |         x         |        x         |
-| Class    | 1/23/2024  | No Class  |                  |               |                  |                |                   |                  |
 | Class    | 1/25/2024  | Thursday  |        x         |       x       |        x         |       x        |                   |        x         |
-| Class    | 1/30/2024  | Tuesday   |                  |               |                  |                |                   |                  |
-| Class    | 2/6/2024   | Thursday  |                  |               |                  |                |                   |                  |
-| Class    | 1/30/2024  | Tuesday   |                  |               |                  |                |                   |                  |
-| Class    | 2/1/2024   | Thursday  |                  |               |                  |                |                   |                  |
+| Class    | 1/30/2024  | Tuesday   |        x         |               |                  |       x        |                   |        x         |
+| Class    | 2/1/2024   | Thursday  |                  |               |        x         |       x        |                   |        x         |
 | Class    | 2/6/2024   | Tuesday   |                  |               |                  |                |                   |                  |
 | Class    | 2/8/2024   | Thursday  |                  |               |                  |                |                   |                  |
 | Class    | 2/13/2024  | Tuesday   |                  |               |                  |                |                   |                  |

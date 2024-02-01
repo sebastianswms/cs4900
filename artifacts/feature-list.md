@@ -1,0 +1,53 @@
+# Feature List
+
+Milestones:
+ - Project structure
+    - Fix git ignore
+    - New repo?
+    - Move data out of environment variables (to .json)
+ - Develop delivery plan
+ - SQL integration
+    - Create/add for tables
+    - Queries on SQL tables
+ - Develop configuration page
+ - CSS/HTML
+    - Decide on any additional libraries
+    - Blank page for every needed component
+ - Graphs and components (charts.js)
+ - Tabular presentation
+ - Print-out functionality
+ - Input validation/schema design
+    - Schema design for API data (per year)
+    - Schema design for CSV data
+    - Allow user to check incoming data
+
+Page by Page Components:
+- Alliance selection
+    - Alliance creator
+    - Team list
+    - Weight/sorting options
+    - Alliance list
+- API data/import page
+    - First API status window
+    - Appsheet/csv data status window
+    - Validate button
+- Match report
+    - Match code
+    - Team number
+    - Match number
+    - Red alliance display
+    - Blue alliance display
+- API schema builder
+    - Imported jason blob view window
+    - Scheme name option
+    - Save/load
+    - Value type menu
+    - Value link method
+- Appsheet schema builder
+    - Imported CSV view window
+    - Scheme name option
+    - Save/load
+    - Value type menu
+    - Value link method
+- Match report schema page
+    - Drag-and-drop report template builder
