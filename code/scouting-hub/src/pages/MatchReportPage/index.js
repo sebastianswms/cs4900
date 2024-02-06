@@ -1,5 +1,6 @@
 import React from "react";
 import AlliancePie from "../../components/charts/AlliancePie";
+import AllianceStackBar from "../../components/charts/AllianceStackBar";
 import Navbar from "../../components/Navbar";
 
 function MatchReportPage() {
@@ -29,6 +30,16 @@ function MatchReportPage() {
               teams={["3539", "3534", "5436"]}
               values={[38.2, 32.7, 29.1]}
             />
+            </div>
+         <div 
+            style={{ width: 400, border: "solid 2px black", padding: "10px"  }}
+         >
+            <AllianceStackBar
+                title={"Auto Charge Station"}
+                teams={["4779", "2054", "5675", "3534", "5436"]}
+                values={[[30, 40, 30], [10, 60, 30], [50, 20, 30], [25, 50, 25], [15, 10, 75]]}
+                legend={["W","D","E"]}
+          />
           </div>
         </div>
       </div>
