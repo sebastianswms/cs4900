@@ -3,6 +3,7 @@ import AlliancePie from "../../components/charts/AlliancePie";
 import AllianceStackBarTwo from "../../components/charts/AllianceStackBarTwo";
 import AllianceStackBarThree from "../../components/charts/AllianceStackBarThree";
 import AllianceStackBarFour from "../../components/charts/AllianceStackBarFour";
+import AllianceStackBarTeams from "../../components/charts/AllianceStackBarTeams";
 import AllianceBar from "../../components/charts/AllianceBar";
 import Navbar from "../../components/Navbar";
 
@@ -69,8 +70,18 @@ function MatchReportPage() {
             <AllianceStackBarTwo
                 title={"Tele Charge Station"}
                 teams={["4779", "2054", "5675", "3539","3534", "5436"]}
-                values={[ [50, 50], [60, 40], [70, 30], [80, 20], [90, 10], [75, 25]]}
+                values={[[50, 50], [60, 40], [70, 30], [80, 20], [90, 10], [75, 25]]}
                 legend={["Cubes", "Cones"]}
+          />
+          </div>
+          <div 
+            style={{ width: 400, border: "solid 2px black", padding: "10px"  }}
+         >
+            <AllianceStackBarTeams
+                 title = "Average Points"
+                 teams = {[["4779", "2054", "5675"], ["3539", "3534", "5436"]]}
+                 values = {[[48, 48, 44], [55, 45, 55]]}
+                 legend = {["Red Alliance", "Blue Alliance"]}
           />
           </div>
         </div>
