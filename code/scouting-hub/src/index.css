@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.page {
+  display: flex;
+  flex-direction: row;
+}
+
 @media print {
   body {
     -webkit-filter: grayscale(100%);
