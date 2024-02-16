@@ -5,32 +5,36 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function AllianceStackBarThree({ title, teams, values, legend }) {
+const sectionColors = [
+  "rgba(255, 99, 132, 0.2)",
+  "rgba(54, 162, 235, 0.2)",
+  "rgba(255, 206, 86, 0.2)",
+  "rgba(255, 159, 64, 0.2)",
+];
+
+const sectionBorderColors = [
+  "rgba(255, 99, 132, 1)",
+  "rgba(54, 162, 235, 1)",
+  "rgba(255, 206, 86, 1)",
+  "rgba(255, 159, 64, 1)",
+];
+
+export default function AllianceStackBar({ title, teams, values, legend }) {
+  const numSections = Math.min(values[0].length, legend.length);
+  const datasets = [];
+  for (let i = 0; i < numSections; i++) {
+    datasets.push({
+      label: legend[i],
+      data: values.map(item => item[i]),
+      backgroundColor: sectionColors[i % sectionColors.length], 
+      borderColor: sectionBorderColors[i % sectionBorderColors.length],
+      borderWidth: 1,
+    });
+  }
+
   const data = {
     labels: teams,
-    datasets: [
-      {
-        label: legend[0],
-        data: values.map(item => item[0]),
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: legend[1],
-        data: values.map(item => item[1]),
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "rgba(54, 162, 235, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: legend[2],
-        data: values.map(item => item[2]),
-        backgroundColor: "rgba(255, 206, 86, 0.2)",
-        borderColor: "rgba(255, 206, 86, 1)",
-        borderWidth: 1,
-      },
-    ],
+    datasets: datasets,
   };
 
   const options = {

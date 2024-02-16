@@ -1,9 +1,7 @@
 import "./index.css";
 import React from "react";
 import AlliancePie from "../../components/charts/AlliancePie";
-import AllianceStackBarTwo from "../../components/charts/AllianceStackBarTwo";
-import AllianceStackBarThree from "../../components/charts/AllianceStackBarThree";
-import AllianceStackBarFour from "../../components/charts/AllianceStackBarFour";
+import AllianceStackBar from "../../components/charts/AllianceStackBar";
 import AllianceStackBarTeams from "../../components/charts/AllianceStackBarTeams";
 import AllianceBar from "../../components/charts/AllianceBar";
 import MatchReport from "../../components/tables/matchReport";
@@ -63,7 +61,7 @@ function MatchReportPage() {
             <p>________________________________________</p>
           </div>
           <div className="area-four">
-            <AllianceStackBarThree
+            <AllianceStackBar
               title={"Auto Charge Station"}
               teams={["4779", "2054", "5675", "3539", "3534", "5436"]}
               values={[
@@ -78,7 +76,7 @@ function MatchReportPage() {
             />
           </div>
           <div className="area-five">
-            <AllianceStackBarFour
+            <AllianceStackBar
               title={"Tele Charge Station"}
               teams={["4779", "2054", "5675", "3539", "3534", "5436"]}
               values={[
@@ -100,7 +98,7 @@ function MatchReportPage() {
             />
           </div>
           <div className="area-seven">
-            <AllianceStackBarTwo
+            <AllianceStackBar
               title={"Cone and Cube Percent"}
               teams={["4779", "2054", "5675", "3539", "3534", "5436"]}
               values={[
