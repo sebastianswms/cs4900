@@ -1,0 +1,27 @@
+.page {
+  display: flex;
+  flex-direction: row;
+}
+
+.page-container {
+  width: 100%;
+  display: flex; /* Set the display to flex */
+}
+
+.header {
+  text-align: left;
+  color: rgb(255, 255, 255); 
+}
+
+.divider {
+  border-bottom: 2px solid #000;
+  margin: 20px 0;
+}
+
+.box {
+  background-color: #8b8b8b; /* Grey background color */
+  border-radius: 10px; /* Rounded corners */
+  padding: 5px; /* Padding on all sides */
+  flex-grow: 1; /* Allow the box to grow and fill remaining space */
+  margin: 10px; /* Add margin on all sides */
+}
