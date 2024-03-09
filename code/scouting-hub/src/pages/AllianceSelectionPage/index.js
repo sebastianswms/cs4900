@@ -1,7 +1,6 @@
-import "./index.css";
-import React from "react";
+import React from 'react';
 import Navbar from "../../components/Navbar";
-import ScrollableTable from "../../components/tables/allienceSelection";
+import TeamTable from '../../components/tables/allienceSelection';
 
 const labels = [
   "Overall",
@@ -16,6 +15,8 @@ const group1Labels = ["Cone", "Cube"];
 const group2Labels = ["Cone", "Cube"];
 const group3Labels = ["Avg Pts", "W", "D", "E"];
 const group4Labels = ["Avg Pts", "W", "P", "D", "E"];
+
+const groupLabels =[group0Labels, group1Labels, group2Labels, group3Labels, group4Labels];
 
 export const teamData = [
   {
@@ -114,9 +115,16 @@ export default function AllianceSelectionPage() {
             <h1>Alliance Selection</h1>
           </div>
           <div className="divider"></div>
-        <div>
-        <ScrollableTable data={teamData} columnLabels={[group0Labels, group1Labels, group2Labels, group3Labels, group4Labels]} />
-        </div>
+          <div className="tables-container">
+            {labels.map((label, index) => (
+              <TeamTable
+                key={index}
+                label={label}
+                groupXLabels={groupLabels[index]}
+                teamData={teamData}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

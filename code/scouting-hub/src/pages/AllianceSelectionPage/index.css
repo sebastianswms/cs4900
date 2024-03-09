@@ -1,6 +1,6 @@
 .page {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .page-container {
@@ -24,4 +24,10 @@
   padding: 5px;
   flex-grow: 1;
   margin: 10px;
+}
+
+.tables-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

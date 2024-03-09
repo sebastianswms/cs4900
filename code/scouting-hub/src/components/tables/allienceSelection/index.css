@@ -1,39 +1,41 @@
-.scrollable-table-container {
+.team-table-container {
     overflow-x: auto;
     max-width: 100%;
-    max-height: 300px;
+    max-height: 500px;
     position: relative;
-}
-
-.scrollable-table {
+  }
+  
+  .team-tables {
     table-layout: auto;
     border-collapse: collapse;
-    width: 100%;
-    min-width: 600px;
-}
-
-.scrollable-table th,
-.scrollable-table td {
+    width: auto;
+    min-width: 300px;
+  }
+  
+  .team-tables th,
+  .team-tables td {
     border: 1px solid black;
     padding: 8px;
     text-align: center;
     background-color: white;
-}
-
-.scrollable-table th {
+    font-size: 16px;
+  }
+  
+  .team-tables th {
     background-color: #4660af;
     color: white;
     border: none;
     position: sticky;
     top: 0;
     z-index: 1;
-}
-
-.scrollable-table td {
+  }
+  
+  .team-tables td {
     border: none;
-}
-
-.scrollable-table tbody tr:hover {
-    background-color: #220de0;
+  }
+  
+  .team-tables tbody tr:hover {
+    background-color: #4660af;
     filter: brightness(120%);
-}
+  }
+  
