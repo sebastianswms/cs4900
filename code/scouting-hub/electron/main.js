@@ -1,12 +1,14 @@
 require("dotenv").config();
-const { app, BrowserWindow, Menu, ipcMain } = require("electron");
+const { app, BrowserWindow, Menu, ipcMain, dialog } = require("electron");
 const path = require("node:path");
 const isDev = require("electron-is-dev");
+const fs = require("fs");
+const csv = require("csv-parser");
 
 const createWindow = () => {
   let window = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 700,
     show: false,
     backgroundColor: "white",
     webPreferences: {
@@ -49,6 +51,33 @@ app.whenReady().then(() => {
     } catch (error) {
       throw error;
     }
+  });
+
+  ipcMain.handle("loadFile", async () => {
+    return dialog
+      .showOpenDialog({ properties: ["openFile"] })
+      .then((result) => {
+        //test to make sure you get a file back
+        //result contains a flag to check if cancelled
+        return result.filePaths[0].toString();
+      })
+      .catch((err) => console.log(err));
+  });
+
+  ipcMain.handle("readHeader", async (event, filePath) => {
+    function getFields(filePath) {
+      return new Promise((resolve) => {
+        let results = [];
+        fs.createReadStream(filePath)
+          .pipe(csv())
+          .on("headers", (headers) => {
+            results = [...headers];
+            console.log("I am actually getting results here: ", results);
+            resolve(results);
+          });
+      });
+    }
+    return await getFields(filePath);
   });
 
   createWindow();

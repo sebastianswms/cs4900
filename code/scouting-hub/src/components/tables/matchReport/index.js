@@ -6,11 +6,11 @@ export default function MatchReport() {
     <table>
       <tr>
         <th>2023micmp1</th>
-        <th colspan="2">TEAM INFO</th>
-        <th colspan="4">OVERALL</th>
-        <th colspan="6">AUTO</th>
-        <th colspan="2">TELE</th>
-        <th colspan="4">ENDGAME</th>
+        <th colSpan="2">TEAM INFO</th>
+        <th colSpan="4">OVERALL</th>
+        <th colSpan="6">AUTO</th>
+        <th colSpan="2">TELE</th>
+        <th colSpan="4">ENDGAME</th>
       </tr>
       <tr>
         <th>semi 45</th>
@@ -18,8 +18,8 @@ export default function MatchReport() {
         <th>Team Name</th>
         <th>Avg pts</th>
         <th>△</th>
-        <th>△</th>
-        <th>△</th>
+        <th>▤</th>
+        <th> </th>
         <th>M%</th>
         <th>△ pts</th>
         <th>▤ pts</th>

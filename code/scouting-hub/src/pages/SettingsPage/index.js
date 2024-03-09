@@ -3,9 +3,11 @@ import Navbar from "../../components/Navbar";
 
 export default function SettingsPage() {
   return (
-    <div>
+    <div className="page">
       <Navbar />
-      <h1>Settings</h1>
+      <div>
+        <h1>Settings</h1>
+      </div>
     </div>
   );
 }

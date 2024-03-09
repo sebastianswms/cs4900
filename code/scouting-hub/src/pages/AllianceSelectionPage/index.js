@@ -3,9 +3,11 @@ import Navbar from "../../components/Navbar";
 
 export default function AllianceSelectionPage() {
   return (
-    <div>
+    <div className="page">
       <Navbar />
-      <h1>Alliance Selection</h1>
+      <div>
+        <h1>Alliance Selection</h1>
+      </div>
     </div>
   );
 }

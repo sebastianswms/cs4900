@@ -6,3 +6,15 @@ contextBridge.exposeInMainWorld("api", {
     return response;
   },
 });
+
+contextBridge.exposeInMainWorld("csv", {
+  loadFile: async () => {
+    const response = await ipcRenderer.invoke("loadFile");
+    return response;
+  },
+
+  readHeader: async (filePath) => {
+    const response = await ipcRenderer.invoke("readHeader", filePath);
+    return response;
+  },
+});
