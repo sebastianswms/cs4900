@@ -1,6 +1,6 @@
 import React from "react";
 
-function SortableTable({ teamData, group, category, sort }) {
+function SortableTable({ teamData, group, category, sortTable }) {
   const numberOfColumns = teamData[0][group]["labels"].length.toString();
   return (
     <table>
@@ -8,13 +8,17 @@ function SortableTable({ teamData, group, category, sort }) {
         <th colSpan={numberOfColumns}>{category}</th>
       </tr>
       <tr>
-        {teamData[0][group]["labels"].map((label) => {
-          return <th onClick={() => sort(category, label)}>{label}</th>;
+        {teamData[0][group]["labels"].map((label, index) => {
+          return (
+            <th key={index} onClick={() => sortTable(group, index)}>
+              {label}
+            </th>
+          );
         })}
       </tr>
       {teamData.map((team) => {
         return (
-          <tr>
+          <tr key={team.team}>
             {team[group]["data"].map((data) => {
               return <td>{data}</td>;
             })}

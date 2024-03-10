@@ -1,8 +1,7 @@
 import React from "react";
 
-function TeamSortableTable({ teamData, group, category, sort, nameSort }) {
+function TeamSortableTable({ teamData, group, category, sortTable, nameSort }) {
   const numberOfColumns = teamData[0][group]["labels"].length.toString();
-  console.log(teamData[0][group]["labels"]);
   return (
     <table>
       <tr>
@@ -10,8 +9,8 @@ function TeamSortableTable({ teamData, group, category, sort, nameSort }) {
       </tr>
       <tr>
         <th onClick={() => nameSort()}>Team</th>
-        {teamData[0][group]["labels"].map((label) => {
-          return <th onClick={() => sort(category, label)}>{label}</th>;
+        {teamData[0][group]["labels"].map((label, index) => {
+          return <th onClick={() => sortTable(group, index)}>{label}</th>;
         })}
       </tr>
       {teamData.map((team) => {
