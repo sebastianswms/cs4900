@@ -1,4 +1,4 @@
-const labels = [
+export const labels = [
   "Overall",
   "Average Auto Scores",
   "Average Tele Scores",
