@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
+import "./index.css";
 import SortableTable from "../../components/tables/sortableTable";
 import TeamSortableTable from "../../components/tables/teamSortableTable";
 import { teamData as importedTeamData, labels } from "../../data/teamData";
@@ -31,41 +32,46 @@ export default function AllianceSelectionPage() {
   return (
     <div className="page">
       <Navbar />
-      <div>
-        <h1>Alliance Selection</h1>
-      </div>
-      <div className="selection-container" style={{ display: "flex" }}>
-        <TeamSortableTable
-          teamData={teamData}
-          group={"group0Data"}
-          category={labels[0]}
-          sortTable={sortTable}
-          nameSort={nameSortTable}
-        />
-        <SortableTable
-          teamData={teamData}
-          group={"group1Data"}
-          category={labels[1]}
-          sortTable={sortTable}
-        />
-        <SortableTable
-          teamData={teamData}
-          group={"group2Data"}
-          category={labels[2]}
-          sortTable={sortTable}
-        />
-        <SortableTable
-          teamData={teamData}
-          group={"group3Data"}
-          category={labels[3]}
-          sortTable={sortTable}
-        />
-        <SortableTable
-          teamData={teamData}
-          group={"group3Data"}
-          category={labels[4]}
-          sortTable={sortTable}
-        />
+      <div className="page-container">
+      <div className="box">
+          <div className="header">
+            <h1>Alliance Selection</h1>
+          </div>
+          <div className="divider"></div>
+          <div className="tables-container" style={{ display: "flex" }}>
+            <TeamSortableTable
+              teamData={teamData}
+              group={"group0Data"}
+              category={labels[0]}
+              sortTable={sortTable}
+              nameSort={nameSortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group1Data"}
+              category={labels[1]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group2Data"}
+              category={labels[2]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group3Data"}
+              category={labels[3]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group3Data"}
+              category={labels[4]}
+              sortTable={sortTable}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

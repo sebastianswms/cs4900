@@ -1,0 +1,38 @@
+.page {
+    display: flex;
+    flex-direction: column;
+  }
+
+.page-container {
+    width: 100%;
+    display: flex;
+  }
+  
+  .header {
+    text-align: left;
+    color: rgb(0, 0, 0); 
+  }
+  
+  .divider {
+    border-bottom: 2px solid #000;
+    margin: 20px 0;
+  }
+
+  .box {
+    background-color: #8b8b8b;
+    border-radius: 10px;
+    padding: 5px;
+    flex-grow: 1;
+    margin: 10px;
+  }
+
+  .tables-container {
+    overflow-x: auto;
+    max-width: 100%;
+    max-height: 500px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
