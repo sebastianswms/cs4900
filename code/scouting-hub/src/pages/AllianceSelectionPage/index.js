@@ -3,10 +3,13 @@ import Navbar from "../../components/Navbar";
 import "./index.css";
 import SortableTable from "../../components/tables/sortableTable";
 import TeamSortableTable from "../../components/tables/teamSortableTable";
+import AllianceSelectionForm from "../../components/forms/allianceSelectionForm";
+import AllianceSelectionDisplay from "../../components/tables/allianceSelectionDisplay";
 import { teamData as importedTeamData, labels } from "../../data/teamData";
 
 export default function AllianceSelectionPage() {
   const [teamData, setTeamData] = useState(importedTeamData);
+  const [optionsArray, setOptionsArray] = useState([]);
   const sortTable = (group, index) => {
     const sorted = teamData.toSorted((a, b) => {
       const valA = a[group]["data"][index];
@@ -38,6 +41,13 @@ export default function AllianceSelectionPage() {
             <h1>Alliance Selection</h1>
           </div>
           <div className="divider"></div>
+          <div className="forms-container" style={{ display: "flex" }}>
+            <div className="header">
+              <h2>Alliance Builder</h2>
+            </div>
+            <div className="divider"></div>
+          <AllianceSelectionForm teamData={teamData} optionsArray={optionsArray} setOptionsArray={setOptionsArray} />
+          </div>
           <div className="tables-container" style={{ display: "flex" }}>
             <TeamSortableTable
               teamData={teamData}
@@ -70,6 +80,9 @@ export default function AllianceSelectionPage() {
               category={labels[4]}
               sortTable={sortTable}
             />
+          </div>
+          <div className="tables-container" style={{ display: "flex" }}>
+            <AllianceSelectionDisplay optionsArray={optionsArray} setOptionsArray={setOptionsArray} />
           </div>
         </div>
       </div>

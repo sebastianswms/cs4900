@@ -1,0 +1,28 @@
+.AllianceSelectionDisplay {
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+.AllianceSelectionDisplay th,
+.AllianceSelectionDisplay td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    background-color: white;
+    font-size: 16px;
+    border: none;
+}
+
+.AllianceSelectionDisplay th {
+    background-color: #4660af;
+    color: white;
+    border: none;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.AllianceSelectionDisplay tbody tr:hover {
+    background-color: #4660af;
+    filter: brightness(120%);
+}

@@ -1,0 +1,20 @@
+.alliance-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .alliance-form-input {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+  
+  .alliance-form-create-button {
+    background-color: #ed892c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
