@@ -12,9 +12,11 @@ code {
     monospace;
 }
 
-.page {
-  display: flex;
-  flex-direction: row;
+.page-container {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  z-index: -1;
 }
 
 @media print {
