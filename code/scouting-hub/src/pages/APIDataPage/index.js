@@ -32,61 +32,63 @@ function APIDataPage() {
   return (
     <div className="page">
       <Navbar />
-      <h1>API Data</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="apiRequestYear">Year: </label>
-        <input
-          type="text"
-          id="apiRequestYear"
-          name="apiRequestYear"
-          value={defaultYear}
-          onChange={(e) => setYear(e.target.value)}
-        />
-        <br />
-        <label htmlFor="apiRequestEvent">Event Code: </label>
-        <input
-          type="text"
-          id="apiRequestEvent"
-          name="apiRequestEvent"
-          value={defaultEventCode}
-          onChange={(e) => setEventCode(e.target.value)}
-        />
-        <br />
-        <button type="submit">Make API Request</button>
-      </form>
+      <div>
+        <h1>API Data</h1>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="apiRequestYear">Year: </label>
+          <input
+            type="text"
+            id="apiRequestYear"
+            name="apiRequestYear"
+            value={defaultYear}
+            onChange={(e) => setYear(e.target.value)}
+          />
+          <br />
+          <label htmlFor="apiRequestEvent">Event Code: </label>
+          <input
+            type="text"
+            id="apiRequestEvent"
+            name="apiRequestEvent"
+            value={defaultEventCode}
+            onChange={(e) => setEventCode(e.target.value)}
+          />
+          <br />
+          <button type="submit">Make API Request</button>
+        </form>
 
-      {matchScores.map((element) => {
-        const headers = Object.keys(element.alliances[0]);
-        return (
-          <div key={element.matchNumber}>
-            <h3>
-              Match Number: {element.matchNumber} Level: {element.matchLevel}
-            </h3>
-            <table style={{ border: "1px solid" }}>
-              <tbody>
-                <tr>
-                  {headers.map((header, index) => (
-                    <th key={index} style={{ border: "1px solid" }}>
-                      {header}
-                    </th>
-                  ))}
-                </tr>
-                {element.alliances.map((e, index) => {
-                  return (
-                    <tr key={index}>
-                      {headers.map((header, index) => (
-                        <td key={index} style={{ border: "1px solid" }}>
-                          {e[header]}
-                        </td>
-                      ))}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        );
-      })}
+        {matchScores.map((element) => {
+          const headers = Object.keys(element.alliances[0]);
+          return (
+            <div key={element.matchNumber}>
+              <h3>
+                Match Number: {element.matchNumber} Level: {element.matchLevel}
+              </h3>
+              <table style={{ border: "1px solid" }}>
+                <tbody>
+                  <tr>
+                    {headers.map((header, index) => (
+                      <th key={index} style={{ border: "1px solid" }}>
+                        {header}
+                      </th>
+                    ))}
+                  </tr>
+                  {element.alliances.map((e, index) => {
+                    return (
+                      <tr key={index}>
+                        {headers.map((header, index) => (
+                          <td key={index} style={{ border: "1px solid" }}>
+                            {e[header]}
+                          </td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

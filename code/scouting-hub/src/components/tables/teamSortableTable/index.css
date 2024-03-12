@@ -1,0 +1,28 @@
+.TeamSortableTable {
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+.TeamSortableTables th,
+.TeamSortableTable td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    background-color: white;
+    font-size: 16px;
+    border: none;
+}
+
+.TeamSortableTable th {
+    background-color: #4660af;
+    color: white;
+    border: none;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.TeamSortableTable tbody tr:hover {
+    background-color: #4660af;
+    filter: brightness(120%);
+}

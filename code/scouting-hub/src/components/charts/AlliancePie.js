@@ -35,7 +35,7 @@ export default function AlliancePie({ title, teams, values }) {
         labels: {
           boxWidth: 20,
           font: {
-            size: 20,
+            size: 15,
           },
         },
       },
@@ -43,7 +43,7 @@ export default function AlliancePie({ title, teams, values }) {
         display: true,
         text: title,
         font: {
-          size: 30,
+          size: 20,
         },
       },
       datalabels: {
@@ -51,7 +51,7 @@ export default function AlliancePie({ title, teams, values }) {
           return `${value} %`;
         },
         font: {
-          size: 30,
+          size: 10,
         },
       },
       tooltip: {

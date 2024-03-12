@@ -1,0 +1,14 @@
+ul {
+  list-style: none;
+  padding: 1px 5px;
+}
+
+a:link {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav {
+  background-color: grey;
+  min-height: 100vh;
+}

@@ -1,0 +1,57 @@
+.match-report {
+  display: grid;
+  max-width: 1000px;
+  grid-template-columns: 33% 17% 17% 33%;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 5px 5px;
+  grid-template-areas:
+    "top-table top-table top-table top-table"
+    "area-one area-two area-two area-three"
+    "area-four area-five area-five area-six"
+    "area-seven area-seven area-eight area-eight";
+}
+.top-table {
+  grid-area: top-table;
+  padding: 5px;
+  border: 2px solid black;
+}
+.area-one {
+  grid-area: area-one;
+  padding: 5px;
+  border: 2px solid black;
+}
+.area-two {
+  grid-area: area-two;
+  padding: 5px;
+  border: 2px solid black;
+}
+.area-three {
+  grid-area: area-three;
+  padding: 5px;
+  border: 2px solid black;
+}
+.area-four {
+  grid-area: area-four;
+  padding: 5px;
+  border: 2px solid black;
+}
+.area-five {
+  grid-area: area-five;
+  padding: 5px;
+  border: 2px solid black;
+}
+.area-six {
+  grid-area: area-six;
+  padding: 5px;
+  border: 2px solid black;
+}
+.area-seven {
+  grid-area: area-seven;
+  padding: 5px;
+  border: 2px solid black;
+}
+.area-eight {
+  grid-area: area-eight;
+  padding: 5px;
+  border: 2px solid black;
+}

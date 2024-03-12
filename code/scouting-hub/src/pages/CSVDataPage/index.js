@@ -2,27 +2,37 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 
 export default function CSVDataPage() {
-  const [myfile, setMyFile] = useState("");
+  const [filePath, setFilePath] = useState("");
+  const [fileHeaders, setFileHeaders] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(myfile);
+  const openFile = async () => {
+    const response = await window.csv.loadFile();
+    setFilePath(response);
   };
+
+  const readHeader = async () => {
+    const response = await window.csv.readHeader(filePath);
+    setFileHeaders(response);
+  };
+
   return (
-    <div>
+    <div className="page">
       <Navbar />
-      <h1>CSV Data</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="file"
-          id="myFile"
-          name="myFile"
-          onChange={(e) => setMyFile(e.target.value)}
-        ></input>
-        <br />
-        <button type="submit">Read CVS Data</button>
-      </form>
-      <p>{myfile}</p>
+      <div>
+        <h1>CSV Data</h1>
+        <div>
+          <button onClick={() => openFile()}>Choose File</button>
+          <p>{filePath}</p>
+        </div>
+        <div>
+          <button onClick={() => readHeader()}>Read headers</button>
+          <ul>
+            {fileHeaders.map((header, index) => {
+              return <li key={index}>{header}</li>;
+            })}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
