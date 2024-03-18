@@ -11,6 +11,7 @@
     background-color: white;
     font-size: 16px;
     border: none;
+
 }
 
 .TeamSortableTable th {
@@ -20,6 +21,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
+    line-height: 2.3;
 }
 
 .TeamSortableTable tbody tr:hover {

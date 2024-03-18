@@ -10,6 +10,7 @@ import { teamData as importedTeamData, labels } from "../../data/teamData";
 export default function AllianceSelectionPage() {
   const [teamData, setTeamData] = useState(importedTeamData);
   const [optionsArray, setOptionsArray] = useState([]);
+  
   const sortTable = (group, index) => {
     const sorted = teamData.toSorted((a, b) => {
       const valA = a[group]["data"][index];
@@ -18,6 +19,7 @@ export default function AllianceSelectionPage() {
     });
     setTeamData(sorted);
   };
+
   const nameSortTable = () => {
     const sorted = teamData.toSorted((a, b) => {
       const nameA = a.name.toUpperCase();
@@ -32,57 +34,66 @@ export default function AllianceSelectionPage() {
     });
     setTeamData(sorted);
   };
+
   return (
     <div className="page">
-      <Navbar />
-      <div className="page-container">
-      <div className="box">
-          <div className="header">
-            <h1>Alliance Selection</h1>
+      <div>
+        <Navbar />
+      </div>
+      <div class="container">
+        <div class="header">
+          <h1>Alliance Selection</h1>
+          <div className="divider"></div>
+        </div>
+        <div class="team-table-container">
+          <TeamSortableTable
+            teamData={teamData}
+            group={"group0Data"}
+            category={labels[0]}
+            sortTable={sortTable}
+            nameSort={nameSortTable}
+          />
+          <SortableTable
+            teamData={teamData}
+            group={"group1Data"}
+            category={labels[1]}
+            sortTable={sortTable}
+          />
+          <SortableTable
+            teamData={teamData}
+            group={"group2Data"}
+            category={labels[2]}
+            sortTable={sortTable}
+          />
+          <SortableTable
+            teamData={teamData}
+            group={"group3Data"}
+            category={labels[3]}
+            sortTable={sortTable}
+          />
+          <SortableTable
+            teamData={teamData}
+            group={"group3Data"}
+            category={labels[4]}
+            sortTable={sortTable}
+          />
           </div>
           <div className="divider"></div>
-          <div className="forms-container" style={{ display: "flex" }}>
+        <div class="alliance-builder-container">
+          <div className="forms-container">
             <div className="header">
               <h2>Alliance Builder</h2>
             </div>
-            <div className="divider"></div>
-          <AllianceSelectionForm teamData={teamData} optionsArray={optionsArray} setOptionsArray={setOptionsArray} />
-          </div>
-          <div className="tables-container" style={{ display: "flex" }}>
-            <TeamSortableTable
+            <AllianceSelectionForm
               teamData={teamData}
-              group={"group0Data"}
-              category={labels[0]}
-              sortTable={sortTable}
-              nameSort={nameSortTable}
-            />
-            <SortableTable
-              teamData={teamData}
-              group={"group1Data"}
-              category={labels[1]}
-              sortTable={sortTable}
-            />
-            <SortableTable
-              teamData={teamData}
-              group={"group2Data"}
-              category={labels[2]}
-              sortTable={sortTable}
-            />
-            <SortableTable
-              teamData={teamData}
-              group={"group3Data"}
-              category={labels[3]}
-              sortTable={sortTable}
-            />
-            <SortableTable
-              teamData={teamData}
-              group={"group3Data"}
-              category={labels[4]}
-              sortTable={sortTable}
+              optionsArray={optionsArray}
+              setOptionsArray={setOptionsArray}
             />
           </div>
-          <div className="tables-container" style={{ display: "flex" }}>
-            <AllianceSelectionDisplay optionsArray={optionsArray} setOptionsArray={setOptionsArray} />
+          <div className="tables-container">
+            <AllianceSelectionDisplay 
+              optionsArray={optionsArray} 
+              setOptionsArray={setOptionsArray} />
           </div>
         </div>
       </div>
