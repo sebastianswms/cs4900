@@ -11,6 +11,7 @@ const createWindow = () => {
     height: 700,
     show: false,
     backgroundColor: "white",
+    icon: path.join(__dirname, "../public/favicon.ico"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
