@@ -37,8 +37,6 @@ export default function Navbar() {
           </div>
         </li>
         <li>
-          {/* <Link to="/">App Status</Link> */}
-          {/* <img src={statusbttn} alt="App Status" width="24px" /> */}
           <Link to="/" className="nav_svg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +55,6 @@ export default function Navbar() {
           </span>
         </li>
         <li>
-          {/* <Link to="/api-data">API Data</Link> */}
           <Link to="/api-data" className="nav_svg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +74,6 @@ export default function Navbar() {
           </span>
         </li>
         <li>
-          {/* <Link to="/csv-data">CSV Data</Link> */}
           <Link to="/csv-data" className="nav_svg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +92,6 @@ export default function Navbar() {
           </span>
         </li>
         <li>
-          {/* <Link to="/match-report">Match Report</Link> */}
           <Link to="/match-report" className="nav_svg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +110,6 @@ export default function Navbar() {
           </span>
         </li>
         <li>
-          {/* <Link to="/alliance-selection">Alliance Selection</Link> */}
           <Link to="/alliance-selection" className="nav_svg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +129,6 @@ export default function Navbar() {
           </span>
         </li>
         <li>
-          {/* <Link to="/settings">Settings</Link> */}
           <Link to="/settings" className="nav_svg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
