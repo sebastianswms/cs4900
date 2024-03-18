@@ -1,14 +1,143 @@
-ul {
-  list-style: none;
-  padding: 1px 5px;
-}
-
-a:link {
-  text-decoration: none;
-  white-space: nowrap;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .nav {
-  background-color: grey;
-  min-height: 100vh;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 80px;
+  background-color: #12171e;
+  padding: 0.4rem 0.8rem;
+}
+.nav.active {
+  width: 250px;
+  min-width: 250px;
+}
+.nav a:link {
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+  color: #fff;
+  padding: 10px;
+  border-radius: 0.8rem;
+}
+.nav a:link:hover {
+  background-color: #FAF9F6;
+}
+.svg_container {
+  padding: 10px;
+}
+
+.menu_close {
+  align-items: center;
+  fill: #FAF9F6;
+  position: absolute;
+  color: #FAF9F6;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.menu_close.active {
+  right: 0%;
+  opacity: 1;
+}
+
+.menu {
+  align-items: center;
+  fill: #FAF9F6;
+  position: absolute;
+  color: #FAF9F6;
+  cursor: pointer;
+}
+.menu.active {
+  left: 80%;
+  opacity: 0;
+}
+
+.menu:hover {
+  fill: #FAF9F6;
+}
+
+
+.nav ul {
+  width: 100%;
+}
+.nav ul li {
+  justify-content: left;
+  position: relative;
+  list-style-type: none;
+  width: 90%;
+  height: 50px;
+  margin: 0.8rem auto;
+  line-height: 50px;
+  display: flex;
+}
+
+.nav ul li:hover {
+  color: #12171e;
+}
+
+.logo {
+  max-width: 100%;
+  display: none;
+}
+
+.logo.active {
+  width: 70%;
+  display: inline;
+}
+
+.tooltip {
+  position: absolute;
+  left: 125px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+  border-radius: .6rem;
+  padding: .4rem .5rem;
+  line-height: 1.8rem;
+  z-index: 20;
+  opacity: 0;
+}
+
+.active_text {
+  display: none;
+  color: #12171e;
+  margin-left: 8px;
+}
+.active_text.active {
+  opacity: 1;
+  display: inline-block;
+  color: #FAF9F6;
+}
+.active_text.active:hover{
+  display: inline;
+  color: #12171e;
+}
+.nav ul li:hover .tooltip{
+  opacity: 1;
+  background-color: #FAF9F6;
+}
+
+.nav ul .tooltip:hover {
+  display: none;
+}
+.nav ul li:hover .tooltip.active{
+  display: none;
+
+}
+
+/*Image changes */
+.nav_svg {
+  fill: #FAF9F6;
+}
+.nav_svg:hover {
+  fill: #12171e;
+}
+.nav_svg:hover .active_text {
+  color: #12171e;
 }

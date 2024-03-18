@@ -6,7 +6,7 @@ function SortableTable({ teamData, group, category, sortTable }) {
   return (
     <table className="SortableTables">
       <tr>
-        <th colSpan={numberOfColumns} className="SortableTables">{category}</th>
+        <th colSpan={numberOfColumns + 1} className="SortableTables">{category}</th>
       </tr>
       <tr>
         {teamData[0][group]["labels"].map((label, index) => {
