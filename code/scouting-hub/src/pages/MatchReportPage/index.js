@@ -30,7 +30,7 @@ function MatchReportPage() {
       <Navbar />
       <div>
         <div className="page-title no-print">
-          <h1>Match Report</h1>
+          <h2>Match Report</h2>
         </div>
         <div className="match-container no-print">
           <MatchSelectionForm

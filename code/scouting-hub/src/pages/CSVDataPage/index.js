@@ -19,7 +19,9 @@ export default function CSVDataPage() {
     <div className="page">
       <Navbar />
       <div>
-        <h1>CSV Data</h1>
+        <div className="page-title">
+          <h2>CSV Data</h2>
+        </div>
         <div>
           <button onClick={() => openFile()}>Choose File</button>
           <p>{filePath}</p>

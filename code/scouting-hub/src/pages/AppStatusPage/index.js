@@ -6,7 +6,9 @@ export default function AppStatusPage() {
     <div className="page">
       <Navbar />
       <div>
-        <h1>App Status</h1>
+        <div className="page-title">
+          <h2>Application Status</h2>
+        </div>
       </div>
     </div>
   );

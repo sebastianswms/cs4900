@@ -33,7 +33,9 @@ function APIDataPage() {
     <div className="page">
       <Navbar />
       <div>
-        <h1>API Data</h1>
+        <div className="page-title">
+          <h2>API Data</h2>
+        </div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="apiRequestYear">Year: </label>
           <input
