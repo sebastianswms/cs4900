@@ -3,7 +3,20 @@ const { app, BrowserWindow, Menu, ipcMain, dialog } = require("electron");
 const path = require("node:path");
 const isDev = require("electron-is-dev");
 const fs = require("fs");
+const fsp = require("fs").promises;
 const csv = require("csv-parser");
+
+let envConfig;
+const configPath = path.join(__dirname, "config.json");
+async function readConfigFile(configPath) {
+  try {
+    const jsonData = await fsp.readFile(configPath, "utf8");
+    envConfig = JSON.parse(jsonData);
+    console.log("JSON Data:", envConfig);
+  } catch (error) {
+    console.error("Error reading file:", error);
+  }
+}
 
 const createWindow = () => {
   let window = new BrowserWindow({
@@ -21,7 +34,7 @@ const createWindow = () => {
 
   window.loadURL(
     isDev
-      ? "http://localhost:3000"
+      ? "http://localhost:3006"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
 
@@ -39,15 +52,17 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   ipcMain.handle("api-get", async (event, { url }) => {
-    const apiUsername = process.env.API_USERNAME;
-    const apiPassword = process.env.API_PASSWORD;
-    const base64Credentials = btoa(`${apiUsername}:${apiPassword}`);
+    await readConfigFile(configPath);
+    const apiUsername = envConfig.API_USERNAME;
+    const apiAuthorizationToken = envConfig.API_AUTHORIZATION_TOKEN;
+    const base64Credentials = btoa(`${apiUsername}:${apiAuthorizationToken}`);
     const authHeader = `Basic ${base64Credentials}`;
     const config = { headers: { Authorization: authHeader } };
-
     try {
       const response = await fetch(url, config);
       const data = await response.json();
+      console.log(response);
+      console.log(data);
       return data;
     } catch (error) {
       throw error;
