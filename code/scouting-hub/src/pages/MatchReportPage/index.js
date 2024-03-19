@@ -7,6 +7,7 @@ import AllianceBar from "../../components/charts/AllianceBar";
 import MatchReport from "../../components/tables/matchReport";
 import Navbar from "../../components/Navbar";
 import MatchSelectionForm from "../../components/forms/MatchSelectionForm";
+import TeamSelectionForm from "../../components/forms/TeamSelectionForm";
 
 function MatchReportPage() {
   const [redAlliance, setRedAlliance] = useState([]);
@@ -16,27 +17,33 @@ function MatchReportPage() {
     <div className="page">
       <Navbar />
       <div>
-        <div className="match-container no-print">
+        <div className="page-title">
           <h1>Match Report</h1>
+        </div>
+        <div className="match-container no-print">
           <MatchSelectionForm
             setBlueAlliance={setBlueAlliance}
             setRedAlliance={setRedAlliance}
           />
         </div>
-        <div className="red-team-container no-print">
-          <h1>Red Alliance</h1>
-          {redAlliance.map((team) => {
-            return <div key={team}>{team}</div>;
-          })}
+        <div className="no-print" style={{ display: "flex", gap: "1em" }}>
+          <TeamSelectionForm
+            name={"Red Alliance"}
+            teams={redAlliance}
+            setAlliance={setRedAlliance}
+            color={"#ED1C24"}
+          />
+          <TeamSelectionForm
+            name={"Blue Alliance"}
+            teams={blueAlliance}
+            setAlliance={setBlueAlliance}
+            color={"#0066B3"}
+          />
         </div>
-        <div className="blue-team-container no-print">
-          <h1>Blue Alliance</h1>
-          {blueAlliance.map((team) => {
-            return <div key={team}>{team}</div>;
-          })}
-        </div>
-        <div className="no-print">
-          <button onClick={() => window.print()}>Print</button>
+        <div className="print-button-container no-print">
+          <button className="print-button" onClick={() => window.print()}>
+            Print
+          </button>
         </div>
         <div className="match-report">
           <div className="top-table">

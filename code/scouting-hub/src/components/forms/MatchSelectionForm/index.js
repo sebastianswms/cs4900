@@ -63,6 +63,7 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
+      <h2>Report Selection</h2>
       <div>
         <span>
           <label htmlFor="match-code">Match Code</label>
@@ -72,9 +73,13 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
             value={matchInfo.matchCode}
             onChange={handleInputChange}
           >
-            <option value=""> -- Select a Code -- </option>
+            <option key="blank" value="">
+              -- Select a Code --
+            </option>
             {matchCodes.map((code) => (
-              <option value={code}>{code}</option>
+              <option key={code} value={code}>
+                {code}
+              </option>
             ))}
           </select>
         </span>
@@ -89,9 +94,13 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
             value={matchInfo.teamNumber}
             onChange={handleInputChange}
           >
-            <option value=""> -- Select a Team -- </option>
+            <option key="blank" value="">
+              -- Select a Team --
+            </option>
             {teams.map((code) => (
-              <option value={code}>{code}</option>
+              <option key={code} value={code}>
+                {code}
+              </option>
             ))}
           </select>
         </span>
@@ -104,15 +113,16 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
             value={matchInfo.matchNumber}
             onChange={handleInputChange}
           >
-            <option value=""> -- Select a Match -- </option>
+            <option key="blank" value="">
+              -- Select a Match --
+            </option>
             {matchNumbers.map((code) => (
-              <option value={code}>{code}</option>
+              <option key={code} value={code}>
+                {code}
+              </option>
             ))}
           </select>
         </span>
-      </div>
-      <div>
-        <button type="submit">Find Match</button>
       </div>
       <div>
         {errorMessage ? (
@@ -120,6 +130,9 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
         ) : (
           <p></p>
         )}
+      </div>
+      <div className="action-button-container">
+        <button type="submit">Find Match</button>
       </div>
     </form>
   );

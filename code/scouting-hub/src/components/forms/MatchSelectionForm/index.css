@@ -1,12 +1,15 @@
 .form-container {
-  padding: 10px 10px;
-  background-color: #94a5d7;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+  padding: 1em 1em;
+  background-color: #9a989a;
+  border-radius: 0.5em;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 .form-container div {
-  padding: 1em 0em;
+  padding: 0.5em 0em;
 }
 
 .form-container label {
@@ -37,4 +40,8 @@
 
 .form-container button:hover {
   background-color: #ed692c;
+}
+
+.action-button-container {
+  align-self: flex-end;
 }
