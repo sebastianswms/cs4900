@@ -1,28 +1,39 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip } from "chart.js";
-import ChartDataLabels from "chartjs-plugin-datalabels";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+} from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
-export default function AllianceStackBarTeams({ title, teams, values, legend }) {
+export default function AllianceStackBarTeams({
+  title,
+  teams,
+  values,
+  legend,
+}) {
   const data = {
     labels: legend,
     datasets: [
       {
-        data: values.map(item => item[0]),
+        data: values.map((item) => item[0]),
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
       },
       {
-        data: values.map(item => item[1]),
+        data: values.map((item) => item[1]),
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderColor: "rgba(54, 162, 235, 1)",
         borderWidth: 1,
       },
       {
-        data: values.map(item => item[2]),
+        data: values.map((item) => item[2]),
         backgroundColor: "rgba(255, 206, 86, 0.2)",
         borderColor: "rgba(255, 206, 86, 1)",
         borderWidth: 1,
@@ -35,7 +46,7 @@ export default function AllianceStackBarTeams({ title, teams, values, legend }) 
     responsive: true,
     plugins: {
       legend: {
-        display: false
+        display: false,
       },
       title: {
         display: true,
@@ -49,12 +60,12 @@ export default function AllianceStackBarTeams({ title, teams, values, legend }) 
       },
       datalabels: {
         display: true,
-        color: 'black',
-        formatter: function(value, context) {
+        color: "black",
+        formatter: function (value, context) {
           const i = context.dataIndex;
           const j = context.datasetIndex;
           return teams[i][j];
-        }
+        },
       },
     },
     scales: {
@@ -69,8 +80,6 @@ export default function AllianceStackBarTeams({ title, teams, values, legend }) 
       },
     },
   };
-  
-  
 
   return <Bar options={options} data={data} />;
 }

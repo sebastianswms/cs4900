@@ -1,9 +1,23 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
-import ChartDataLabels from "chartjs-plugin-datalabels";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const sectionColors = [
   "rgba(255, 99, 132, 0.2)",
@@ -25,8 +39,8 @@ export default function AllianceStackBar({ title, teams, values, legend }) {
   for (let i = 0; i < numSections; i++) {
     datasets.push({
       label: legend[i],
-      data: values.map(item => item[i]),
-      backgroundColor: sectionColors[i % sectionColors.length], 
+      data: values.map((item) => item[i]),
+      backgroundColor: sectionColors[i % sectionColors.length],
       borderColor: sectionBorderColors[i % sectionBorderColors.length],
       borderWidth: 1,
     });
@@ -72,9 +86,9 @@ export default function AllianceStackBar({ title, teams, values, legend }) {
         stacked: true,
         ticks: {
           callback: function (value) {
-            return value + '%';
-          }
-        }
+            return value + "%";
+          },
+        },
       },
     },
   };

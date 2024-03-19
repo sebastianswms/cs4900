@@ -1,9 +1,23 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, } from "chart.js";
-import ChartDataLabels from "chartjs-plugin-datalabels";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default function AllianceBar({ title, teams, values }) {
   const data = {
@@ -18,7 +32,7 @@ export default function AllianceBar({ title, teams, values }) {
           "rgba(255, 206, 86, 0.2)",
           "rgba(75, 192, 192, 0.2)",
           "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)"
+          "rgba(255, 159, 64, 0.2)",
         ],
         borderColor: [
           "rgba(255, 99, 132, 1)",
@@ -26,7 +40,7 @@ export default function AllianceBar({ title, teams, values }) {
           "rgba(255, 206, 86, 1)",
           "rgba(75, 192, 192, 1)",
           "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)"
+          "rgba(255, 159, 64, 1)",
         ],
         borderWidth: 1,
       },
@@ -38,7 +52,7 @@ export default function AllianceBar({ title, teams, values }) {
     responsive: true,
     plugins: {
       legend: {
-        display: false
+        display: false,
       },
       title: {
         display: true,
@@ -58,21 +72,19 @@ export default function AllianceBar({ title, teams, values }) {
       x: {
         stacked: false,
         grid: {
-          display: false
-        }
+          display: false,
+        },
       },
       y: {
         stacked: false,
         ticks: {
-          callback: function(value) {
-            return value + '%';
-          }
-        }
+          callback: function (value) {
+            return value + "%";
+          },
+        },
       },
     },
   };
 
   return <Bar options={options} data={data} />;
 }
-
-
