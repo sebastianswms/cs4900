@@ -1,34 +1,39 @@
 import "./index.css";
-import React from "react";
+import React, { useState } from "react";
 import AlliancePie from "../../components/charts/AlliancePie";
 import AllianceStackBar from "../../components/charts/AllianceStackBar";
 import AllianceStackBarTeams from "../../components/charts/AllianceStackBarTeams";
 import AllianceBar from "../../components/charts/AllianceBar";
 import MatchReport from "../../components/tables/matchReport";
 import Navbar from "../../components/Navbar";
+import MatchSelectionForm from "../../components/forms/MatchSelectionForm";
 
 function MatchReportPage() {
+  const [redAlliance, setRedAlliance] = useState([]);
+  const [blueAlliance, setBlueAlliance] = useState([]);
+
   return (
     <div className="page">
       <Navbar />
-      <div className="page-container">
+      <div>
         <div className="match-container no-print">
           <h1>Match Report</h1>
-          <form>
-            <label for="match-code">Match Code</label>
-            <input type="text" id="match-code" value="" />
-            <label for="team-number">Team Number</label>
-            <input type="text" id="team-number" value="" />
-            <label for="match-number">Match Number</label>
-            <input type="text" id="match-number" value="" />
-            <button>Find Match</button>
-          </form>
+          <MatchSelectionForm
+            setBlueAlliance={setBlueAlliance}
+            setRedAlliance={setRedAlliance}
+          />
         </div>
         <div className="red-team-container no-print">
           <h1>Red Alliance</h1>
+          {redAlliance.map((team) => {
+            return <div key={team}>{team}</div>;
+          })}
         </div>
         <div className="blue-team-container no-print">
           <h1>Blue Alliance</h1>
+          {blueAlliance.map((team) => {
+            return <div key={team}>{team}</div>;
+          })}
         </div>
         <div className="no-print">
           <button onClick={() => window.print()}>Print</button>

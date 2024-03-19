@@ -12,13 +12,6 @@ code {
     monospace;
 }
 
-.page-container {
-  position: absolute;
-  top: 0;
-  left: 80px;
-  z-index: -1;
-}
-
 @media print {
   body {
     -webkit-filter: grayscale(100%);
