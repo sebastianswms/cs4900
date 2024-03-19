@@ -54,7 +54,7 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
       setBlueAlliance([]);
     } else {
       setErrorMessage("");
-      setRedAlliance(["4779", "2054", "5675"]);
+      setRedAlliance(["4479", "2054", "5675"]);
       setBlueAlliance(["3539", "3534", "5436"]);
     }
     //find match schedule in DB , if error don't set team.

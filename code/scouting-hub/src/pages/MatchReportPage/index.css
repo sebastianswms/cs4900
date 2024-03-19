@@ -11,6 +11,7 @@
     "area-seven area-seven area-eight area-eight";
 }
 .top-table {
+  display: flex;
   grid-area: top-table;
   padding: 5px;
   border: 2px solid black;

@@ -4,20 +4,32 @@ import AlliancePie from "../../components/charts/AlliancePie";
 import AllianceStackBar from "../../components/charts/AllianceStackBar";
 import AllianceStackBarTeams from "../../components/charts/AllianceStackBarTeams";
 import AllianceBar from "../../components/charts/AllianceBar";
-import MatchReport from "../../components/tables/matchReport";
 import Navbar from "../../components/Navbar";
 import MatchSelectionForm from "../../components/forms/MatchSelectionForm";
 import TeamSelectionForm from "../../components/forms/TeamSelectionForm";
+import SortableTable from "../../components/tables/sortableTable";
+import { teamData as importedTeamData, labels } from "../../data/teamData";
+import MatchTeamTable from "../../components/tables/matchTeamTable";
 
 function MatchReportPage() {
   const [redAlliance, setRedAlliance] = useState([]);
   const [blueAlliance, setBlueAlliance] = useState([]);
+  const [teamData, setTeamData] = useState(importedTeamData.slice(0, 6));
+
+  const sortTable = (group, index) => {
+    const sorted = teamData.toSorted((a, b) => {
+      const valA = a[group]["data"][index];
+      const valB = b[group]["data"][index];
+      return valB - valA;
+    });
+    setTeamData(sorted);
+  };
 
   return (
     <div className="page">
       <Navbar />
       <div>
-        <div className="page-title">
+        <div className="page-title no-print">
           <h1>Match Report</h1>
         </div>
         <div className="match-container no-print">
@@ -41,13 +53,51 @@ function MatchReportPage() {
           />
         </div>
         <div className="print-button-container no-print">
-          <button className="print-button" onClick={() => window.print()}>
+          <button
+            className="print-button no-print"
+            onClick={() => window.print()}
+          >
             Print
           </button>
         </div>
         <div className="match-report">
           <div className="top-table">
-            <MatchReport />
+            <MatchTeamTable
+              teamData={teamData}
+              matchInfo={{ matchCode: "2023micmp", matchNumber: "45" }}
+              redAlliance={redAlliance}
+              blueAlliance={blueAlliance}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group0Data"}
+              category={labels[0]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group1Data"}
+              category={labels[1]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group2Data"}
+              category={labels[2]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group3Data"}
+              category={labels[3]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group3Data"}
+              category={labels[4]}
+              sortTable={sortTable}
+            />
           </div>
           <div className="area-one">
             <AlliancePie
