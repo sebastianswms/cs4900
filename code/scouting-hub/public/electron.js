@@ -1,7 +1,6 @@
 require("dotenv").config();
 const { app, BrowserWindow, Menu, ipcMain, dialog } = require("electron");
 const path = require("node:path");
-const isDev = require("electron-is-dev");
 const fs = require("fs");
 const fsp = require("fs").promises;
 const csv = require("csv-parser");
@@ -32,16 +31,7 @@ const createWindow = () => {
 
   Menu.setApplicationMenu(null);
 
-  window.loadURL(
-    isDev
-      ? "http://localhost:3006"
-      : `file://${path.join(__dirname, "../build/index.html")}`
-  );
-
-  // Open the DevTools.
-  if (isDev) {
-    window.webContents.openDevTools();
-  }
+  window.loadURL(`file://${path.join(__dirname, "../build/index.html")}`);
 
   window.once("ready-to-show", () => window.show());
 

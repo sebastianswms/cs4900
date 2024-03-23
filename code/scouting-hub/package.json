@@ -1,8 +1,11 @@
 {
-  "name": "scouting-hub",
+  "name": "wiredcats-scouting-app",
   "version": "0.1.0",
   "private": true,
-  "main": "electron/main.js",
+  "author": "CS4910 Group 5",
+  "description": "WiredCats Scouting App",
+  "homepage": "./",
+  "main": "./public/electron.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -19,12 +22,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cross-env PORT=3006 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm:electron\"",
-    "electron": "wait-on tcp:3006 && electron ."
+    "electron:start": "concurrently -k \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3006 && electronmon .\"",
+    "electron:package:mac": "yarn build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "electron:package:win": "yarn build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "electron:package:linux": "yarn build && electron-builder -l -c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": [
@@ -34,11 +39,13 @@
   },
   "browserslist": {
     "production": [
+      "last 1 electron version",
       ">0.2%",
       "not dead",
       "not op_mini all"
     ],
     "development": [
+      "last 1 electron version",
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
@@ -46,8 +53,31 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "electron": "^27.3.2",
+    "cross-env": "^7.0.3",
+    "electron": "^29.1.5",
+    "electron-builder": "^24.13.3",
     "electron-is-dev": "^2.0.0",
+    "electronmon": "^2.0.2",
     "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.WiredCats.app",
+    "productName": "WiredCats Scouting App",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "deb"
+    }
   }
 }
