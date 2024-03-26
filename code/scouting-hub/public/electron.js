@@ -1,12 +1,14 @@
 require("dotenv").config();
-const { app, BrowserWindow, Menu, ipcMain, dialog } = require("electron");
-const path = require("node:path");
+const { app, BrowserWindow, Menu, ipcMain, dialog, protocol } = require("electron");
+const path = require("path");
 const fs = require("fs");
 const fsp = require("fs").promises;
 const csv = require("csv-parser");
+const url = require("url");
 
 let envConfig;
 const configPath = path.join(__dirname, "config.json");
+
 async function readConfigFile(configPath) {
   try {
     const jsonData = await fsp.readFile(configPath, "utf8");
@@ -38,9 +40,39 @@ const createWindow = () => {
   window.on("closed", () => {
     window = null;
   });
+
+  const appURL = app.isPackaged
+    ? url.format({
+        pathname: path.join(__dirname, "index.html"),
+        protocol: "file:",
+        slashes: true,
+      })
+    : "http://localhost:3006";
+
+  mainWindow.loadURL(appURL);
+
+  if (!app.isPackaged) {
+    mainWindow.webContents.openDevTools();
+  }
 };
 
+function setupLocalFilesNormalizerProxy() {
+  protocol.registerHttpProtocol(
+    "file",
+    (request, callback) => {
+      const url = request.url.substr(8);
+      callback({ path: path.normalize(`${__dirname}/${url}`) });
+    },
+    (error) => {
+      if (error) console.error("Failed to register protocol");
+    }
+  );
+}
+
 app.whenReady().then(() => {
+  createWindow();
+  setupLocalFilesNormalizerProxy();
+
   ipcMain.handle("api-get", async (event, { url }) => {
     await readConfigFile(configPath);
     const apiUsername = envConfig.API_USERNAME;
@@ -86,17 +118,26 @@ app.whenReady().then(() => {
     return await getFields(filePath);
   });
 
-  createWindow();
-
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
   });
+
+  app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
+  });
 });
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+const allowedNavigationDestinations = "https://my-electron-app.com";
+app.on("web-contents-created", (event, contents) => {
+  contents.on("will-navigate", (event, navigationUrl) => {
+    const parsedUrl = new URL(navigationUrl);
+ 
+    if (!allowedNavigationDestinations.includes(parsedUrl.origin)) {
+      event.preventDefault();
+    }
+  });
 });
