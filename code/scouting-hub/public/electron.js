@@ -1,55 +1,40 @@
-require("dotenv").config();
-const { app, BrowserWindow, Menu, ipcMain, dialog, protocol } = require("electron");
-const path = require("path");
-const fs = require("fs");
-const fsp = require("fs").promises;
-const csv = require("csv-parser");
-const url = require("url");
+require('dotenv').config();
+const { app, BrowserWindow, Menu, ipcMain, dialog, protocol } = require('electron');
+const fs = require('fs');
+const fsp = require('fs').promises;
+const csv = require('csv-parser');
 
-let envConfig;
-const configPath = path.join(__dirname, "config.json");
+let mainWindow;
 
-async function readConfigFile(configPath) {
-  try {
-    const jsonData = await fsp.readFile(configPath, "utf8");
-    envConfig = JSON.parse(jsonData);
-    console.log("JSON Data:", envConfig);
-  } catch (error) {
-    console.error("Error reading file:", error);
-  }
-}
+const configPath = `${__dirname}/../build/config.json`;
+const preloadPath = `${__dirname}/../build/preload.js`;
+const iconPath = `${__dirname}/../build/favicon.ico`;
+const indexPath = `${__dirname}/../build/index.html`;
 
 const createWindow = () => {
-  let window = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1200,
     height: 700,
     show: false,
-    backgroundColor: "white",
-    icon: path.join(__dirname, "../public/favicon.ico"),
+    icon: iconPath,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      preload: preloadPath,
     },
   });
 
   Menu.setApplicationMenu(null);
 
-  window.loadURL(`file://${path.join(__dirname, "../build/index.html")}`);
-
-  window.once("ready-to-show", () => window.show());
-
-  window.on("closed", () => {
-    window = null;
-  });
-
   const appURL = app.isPackaged
-    ? url.format({
-        pathname: path.join(__dirname, "index.html"),
-        protocol: "file:",
-        slashes: true,
-      })
-    : "http://localhost:3006";
+    ? `file://${indexPath}`
+    : 'http://localhost:3000';
 
   mainWindow.loadURL(appURL);
+
+  mainWindow.once('ready-to-show', () => mainWindow.show());
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 
   if (!app.isPackaged) {
     mainWindow.webContents.openDevTools();
@@ -58,13 +43,13 @@ const createWindow = () => {
 
 function setupLocalFilesNormalizerProxy() {
   protocol.registerHttpProtocol(
-    "file",
+    'file',
     (request, callback) => {
       const url = request.url.substr(8);
-      callback({ path: path.normalize(`${__dirname}/${url}`) });
+      callback({ path: `${__dirname}/${url}` });
     },
     (error) => {
-      if (error) console.error("Failed to register protocol");
+      if (error) console.error('Failed to register protocol');
     }
   );
 }
@@ -73,13 +58,15 @@ app.whenReady().then(() => {
   createWindow();
   setupLocalFilesNormalizerProxy();
 
-  ipcMain.handle("api-get", async (event, { url }) => {
-    await readConfigFile(configPath);
+  ipcMain.handle('api-get', async (event, { url }) => {
+    const jsonData = await fsp.readFile(configPath, 'utf8');
+    const envConfig = JSON.parse(jsonData);
     const apiUsername = envConfig.API_USERNAME;
     const apiAuthorizationToken = envConfig.API_AUTHORIZATION_TOKEN;
-    const base64Credentials = btoa(`${apiUsername}:${apiAuthorizationToken}`);
+    const base64Credentials = Buffer.from(`${apiUsername}:${apiAuthorizationToken}`).toString('base64');
     const authHeader = `Basic ${base64Credentials}`;
     const config = { headers: { Authorization: authHeader } };
+
     try {
       const response = await fetch(url, config);
       const data = await response.json();
@@ -91,26 +78,24 @@ app.whenReady().then(() => {
     }
   });
 
-  ipcMain.handle("loadFile", async () => {
+  ipcMain.handle('loadFile', async () => {
     return dialog
-      .showOpenDialog({ properties: ["openFile"] })
+      .showOpenDialog({ properties: ['openFile'] })
       .then((result) => {
-        //test to make sure you get a file back
-        //result contains a flag to check if cancelled
         return result.filePaths[0].toString();
       })
       .catch((err) => console.log(err));
   });
 
-  ipcMain.handle("readHeader", async (event, filePath) => {
+  ipcMain.handle('readHeader', async (event, filePath) => {
     function getFields(filePath) {
       return new Promise((resolve) => {
         let results = [];
         fs.createReadStream(filePath)
           .pipe(csv())
-          .on("headers", (headers) => {
+          .on('headers', (headers) => {
             results = [...headers];
-            console.log("I am actually getting results here: ", results);
+            console.log('Results: ', results);
             resolve(results);
           });
       });
@@ -118,22 +103,22 @@ app.whenReady().then(() => {
     return await getFields(filePath);
   });
 
-  app.on("activate", () => {
+  app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
   });
 
-  app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
       app.quit();
     }
   });
 });
 
-const allowedNavigationDestinations = "https://my-electron-app.com";
-app.on("web-contents-created", (event, contents) => {
-  contents.on("will-navigate", (event, navigationUrl) => {
+const allowedNavigationDestinations = 'https://my-electron-app.com';
+app.on('web-contents-created', (event, contents) => {
+  contents.on('will-navigate', (event, navigationUrl) => {
     const parsedUrl = new URL(navigationUrl);
  
     if (!allowedNavigationDestinations.includes(parsedUrl.origin)) {
