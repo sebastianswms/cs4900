@@ -71,13 +71,16 @@
       "buildResources": "public"
     },
     "mac": {
-      "target": "dmg"
+      "target": "dmg",
+      "icon":"/../build/favicon.ico"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon":"/../build/favicon.ico"
     },
     "linux": {
-      "target": "deb"
+      "target": "deb",
+      "icon":"/../build/favicon.icoo"
     }
   }
 }
