@@ -1,7 +1,7 @@
 import "./index.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/logo.webp";
+import logo from "../../images/logo.jpeg";
 export default function Navbar() {
   const [isActive, setisActive] = useState(false);
 

@@ -7,7 +7,7 @@ const AllianceSelectionDisplay = ({ optionsArray, setOptionsArray }) => {
   };
 
   return (
-    <div>
+    <div data-testid="alliance-display">
       <table className="AllianceSelectionDisplay">
         <thead>
           <tr>
@@ -23,7 +23,7 @@ const AllianceSelectionDisplay = ({ optionsArray, setOptionsArray }) => {
               <td>{row[0]}</td>
               <td>{row[1]}</td>
               <td>{row[2]}</td>
-              <td><button onClick={() => handleDeleteRow(index)}>Delete</button></td>
+              <td><button data-testid="delete-button" onClick={() => handleDeleteRow(index)}>Delete</button></td>
             </tr>
           ))}
         </tbody>

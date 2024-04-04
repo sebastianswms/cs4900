@@ -40,63 +40,71 @@ export default function AllianceSelectionPage() {
       <div>
         <Navbar />
       </div>
-      <div class="container">
+      <div class="page-container">
+        <div class="container">
         <div class="header">
-          <h1>Alliance Selection</h1>
-          <div className="divider"></div>
-        </div>
-        <div class="team-table-container">
-          <TeamSortableTable
-            teamData={teamData}
-            group={"group0Data"}
-            category={labels[0]}
-            sortTable={sortTable}
-            nameSort={nameSortTable}
-          />
-          <SortableTable
-            teamData={teamData}
-            group={"group1Data"}
-            category={labels[1]}
-            sortTable={sortTable}
-          />
-          <SortableTable
-            teamData={teamData}
-            group={"group2Data"}
-            category={labels[2]}
-            sortTable={sortTable}
-          />
-          <SortableTable
-            teamData={teamData}
-            group={"group3Data"}
-            category={labels[3]}
-            sortTable={sortTable}
-          />
-          <SortableTable
-            teamData={teamData}
-            group={"group3Data"}
-            category={labels[4]}
-            sortTable={sortTable}
-          />
+            <h1>Alliance Selection</h1>
           </div>
-          <div className="divider"></div>
-        <div class="alliance-builder-container">
-          <div className="forms-container">
-            <div className="header">
-              <h2>Alliance Builder</h2>
-            </div>
-            <AllianceSelectionForm
+        </div>
+        <div class="container">
+          <div class="team-table-container">
+            <TeamSortableTable
               teamData={teamData}
-              optionsArray={optionsArray}
-              setOptionsArray={setOptionsArray}
+              group={"group0Data"}
+              category={labels[0]}
+              sortTable={sortTable}
+              nameSort={nameSortTable}
             />
+            <SortableTable
+              teamData={teamData}
+              group={"group1Data"}
+              category={labels[1]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group2Data"}
+              category={labels[2]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group3Data"}
+              category={labels[3]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group3Data"}
+              category={labels[4]}
+              sortTable={sortTable}
+            />
+            </div>
+        </div>
+        <div class="container" style={{ minHeight: '160px' }}>
+          <div className="header">
+            <h2>Alliance Builder</h2>
           </div>
-          <div className="tables-container">
-            <AllianceSelectionDisplay 
-              optionsArray={optionsArray} 
-              setOptionsArray={setOptionsArray} />
+          <div class="alliance-builder-container">
+            <div class="center">
+              <div className="forms-container">
+                  <AllianceSelectionForm
+                    teamData={teamData}
+                    optionsArray={optionsArray}
+                    setOptionsArray={setOptionsArray}
+                  />
+                </div>
+            </div>
+            <div class="center">
+              <div className="alliance-container">
+                  <AllianceSelectionDisplay 
+                    optionsArray={optionsArray} 
+                    setOptionsArray={setOptionsArray} />
+                </div>
+            </div>
           </div>
         </div>
-      </div>
+      </div>  
     </div>
   );
 }
