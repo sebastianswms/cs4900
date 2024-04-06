@@ -1,7 +1,12 @@
 .container {
   display: flex;
-  flex-direction: column;  
-  background-color: #8b8b8b;
+  flex-direction: column;
+  margin: 0.5em;
+  padding: 1em 1em;
+  background-color: #9a989a;
+  border-radius: 0.5em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+  rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; 
   border-radius: 10px;
   flex-grow: 1;
   margin: 5px;
@@ -13,6 +18,8 @@
   overflow-x: auto;
   min-height: 300px;
   max-height: 400px;
+  padding: 5px;
+  border: 2px solid black
 }
 
 .forms-container {
@@ -22,7 +29,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px 10px;
-  background-color: #94a5d7;
+  background-color: #9a989a;
   border-radius: 10px;
 }
 
@@ -61,5 +68,41 @@
     max-height: 130px;
   }
 
+  .print-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0.5em;
+    padding: 1em 1em;
+    background-color: #9a989a;
+    border-radius: 0.5em;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  }
+
+  .print-button {
+    background-color: #ed892c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  }
+  .print-button:hover {
+    background-color: #ed692c;
+  }
+
   
-  
+  @media print {
+    .container{
+      visibility: hidden;
+    }
+    .print-button-container{
+      visibility: hidden;
+    }
+    .team-table-container {
+      position: static;
+      max-height: none;
+    }
+  }

@@ -46,7 +46,6 @@ export default function AllianceSelectionPage() {
             <h1>Alliance Selection</h1>
           </div>
         </div>
-        <div class="container">
           <div class="team-table-container">
             <TeamSortableTable
               teamData={teamData}
@@ -79,8 +78,10 @@ export default function AllianceSelectionPage() {
               category={labels[4]}
               sortTable={sortTable}
             />
-            </div>
-        </div>
+          </div>
+          <div className="print-button-container">
+              <button className="print-button" onClick={() => window.print()}>Print</button>
+          </div>
         <div class="container" style={{ minHeight: '160px' }}>
           <div className="header">
             <h2>Alliance Builder</h2>
