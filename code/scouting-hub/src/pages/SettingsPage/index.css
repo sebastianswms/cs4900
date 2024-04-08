@@ -1,4 +1,4 @@
-.form-container {
+.settings-container {
   display: flex;
   flex-direction: column;
   margin: 0.5em;
@@ -8,46 +8,26 @@
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.form-title {
+.settings-title {
   border-radius: 0.25em 0.25em 0em 0em;
   min-height: 1.3em;
   padding: 0.25em 1em;
   background-color: #6b6b6b;
 }
 
-.form-context {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.settings-context {
   padding: 0.25em 1em;
 }
 
-.form-footer {
-  border-radius: 0em 0em 0.25em 0.25em;
-  background-color: #6b6b6b;
-  padding: 0.25em 1em;
-}
-.inline {
+.settings-between {
   display: flex;
+  justify-content: space-between;
   padding: 0.25em 0.25em 0em 0em;
 }
 
-.inline > label {
+.settings-between > label {
   font-weight: bold;
   padding-right: 0.5em;
-}
-
-.inline > select {
-  margin: 0.25em;
-}
-
-.form-container span {
-  padding: 0.5em 0.5em 0em 0em;
-}
-
-.error-message {
-  min-height: 1.4em;
-  color: rgb(150, 0, 0);
 }
 
 .button--orange {
@@ -63,11 +43,4 @@
 
 .button--orange:hover {
   background-color: #ed692c;
-}
-
-.span--white {
-  background-color: whitesmoke;
-  padding: 0em 0.5em;
-  margin-right: 0.5em;
-  border-radius: 0.25em;
 }

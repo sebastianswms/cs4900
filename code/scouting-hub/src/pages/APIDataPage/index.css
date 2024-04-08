@@ -1,4 +1,4 @@
-.form-container {
+.api-container {
   display: flex;
   flex-direction: column;
   margin: 0.5em;
@@ -8,66 +8,42 @@
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.form-title {
+.api-title {
   border-radius: 0.25em 0.25em 0em 0em;
   min-height: 1.3em;
   padding: 0.25em 1em;
   background-color: #6b6b6b;
 }
 
-.form-context {
+.api-context {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.25em 1em;
 }
 
-.form-footer {
+.api-footer {
   border-radius: 0em 0em 0.25em 0.25em;
   background-color: #6b6b6b;
   padding: 0.25em 1em;
 }
-.inline {
+
+.space-between {
   display: flex;
+  justify-content: space-between;
   padding: 0.25em 0.25em 0em 0em;
 }
 
-.inline > label {
+.space-between > label {
   font-weight: bold;
   padding-right: 0.5em;
 }
 
-.inline > select {
+.space-between > select {
   margin: 0.25em;
 }
 
-.form-container span {
-  padding: 0.5em 0.5em 0em 0em;
-}
-
 .error-message {
-  min-height: 1.4em;
+  min-height: 1.3em;
   color: rgb(150, 0, 0);
-}
-
-.button--orange {
-  background-color: #ed892c;
-  color: white;
-  border: none;
-  border-radius: 0.25em;
-  padding: 10px 20px;
-  cursor: pointer;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-}
-
-.button--orange:hover {
-  background-color: #ed692c;
-}
-
-.span--white {
-  background-color: whitesmoke;
-  padding: 0em 0.5em;
-  margin-right: 0.5em;
-  border-radius: 0.25em;
 }

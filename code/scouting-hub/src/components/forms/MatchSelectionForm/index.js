@@ -1,138 +1,147 @@
 import "./index.css";
 import React, { useState, useEffect } from "react";
 
-//fake data
-
-const fakeDefaultMatchInfo = {
-  matchCode: "",
-  teamNumber: "",
-  matchNumber: "",
-};
-
-const fakeMatchCodes = [
-  "Qualification 1",
-  "Qualification 2",
-  "Qualification 3",
-];
-const fakeTeams = ["5535", "6152", "3333", "3538", "7220", "6666", "4381"];
-const fakeMatches = ["1", "22", "3", "4", "5", "6", "45"];
-
-//fake data
-
 function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
-  const [matchInfo, setMatchInfo] = useState(fakeDefaultMatchInfo);
-  const [matchCodes, setMatchCodes] = useState(fakeMatchCodes);
-  const [teams, setTeams] = useState(fakeTeams);
-  const [matchNumbers, setMatchNumbers] = useState(fakeMatches);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [year, setYear] = useState("");
+  const [district, setDistrict] = useState("");
+  const [eventCode, setEventCode] = useState("");
+  const [matchNumber, setMatchNumber] = useState("");
+  const [tournamentLevel, setTournamentLevel] = useState("Qualification");
 
-  useEffect(() => {
-    //todo: on component load
-    //todo: get teams that are in database, matchCodes, matchNumbers
-  }, []);
+  const [matchNumbers, setMatchNumbers] = useState([]);
+  const [error, setError] = useState("");
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setMatchInfo({
-      ...matchInfo,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(matchInfo);
-    if (
-      matchInfo.matchCode === "" &&
-      (matchInfo.teamNumber === "" || matchInfo.matchNumber === "")
+  const getTeams = async (e) => {
+    e.preventDefault();
+    if (matchNumber === "" || tournamentLevel === "") {
       //todo: add for all values true to prevent bad searches
-    ) {
-      setErrorMessage(
-        "Please select a <Match Code> or select a <Team Number> and <Match Number>"
-      );
+      setError("Please select a <Match Number> and <Tournament Level>");
       setRedAlliance([]);
       setBlueAlliance([]);
     } else {
-      setErrorMessage("");
-      setRedAlliance(["4479", "2054", "5675"]);
-      setBlueAlliance(["3539", "3534", "5436"]);
+      setError(null);
+      try {
+        const results = await window.database.findByObject("matches", {
+          year,
+          district,
+          event_code: eventCode,
+          tournament_level: tournamentLevel,
+          match_number: matchNumber,
+        });
+        setRedAlliance([results.red1, results.red2, results.red3]);
+        setBlueAlliance([results.blue1, results.blue2, results.blue3]);
+      } catch (err) {
+        setError(err);
+        setRedAlliance([]);
+        setBlueAlliance([]);
+      }
     }
     //find match schedule in DB , if error don't set team.
     //print error if team not found, or non valid form submit
   };
 
+  const fetchSettings = async () => {
+    try {
+      const settings = await window.envConfig.readConfig();
+      setError(undefined);
+      setYear(settings.CURRENT_YEAR);
+      setDistrict(settings.DISTRICT);
+      setEventCode(settings.CURRENT_EVENT_CODE);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const getMatchNumbers = async () => {
+    try {
+      const results = await window.database.findAllDistinct(
+        "matches",
+        "match_number"
+      );
+
+      setError(undefined);
+      setMatchNumbers(results);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchSettings();
+    getMatchNumbers();
+  }, []);
+
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <h2>Report Selection</h2>
-      <div>
-        <span>
-          <label htmlFor="match-code">Match Code</label>
-          <select
-            name="matchCode"
-            id="match-code"
-            value={matchInfo.matchCode}
-            onChange={handleInputChange}
-          >
-            <option key="blank" value="">
-              -- Select a Code --
-            </option>
-            {matchCodes.map((code) => (
-              <option key={code} value={code}>
-                {code}
-              </option>
-            ))}
-          </select>
-        </span>
-        <span>or</span>
+    <form className="form-container" onSubmit={getTeams}>
+      <div className="form-title">
+        <h3>Report Selection</h3>
       </div>
-      <div>
-        <span>
-          <label htmlFor="team-number">Team Number</label>
-          <select
-            name="teamNumber"
-            id="team-number"
-            value={matchInfo.teamNumber}
-            onChange={handleInputChange}
-          >
-            <option key="blank" value="">
-              -- Select a Team --
-            </option>
-            {teams.map((code) => (
-              <option key={code} value={code}>
-                {code}
+      <form onSubmit={getTeams}></form>
+      <div className="form-context">
+        <div>
+          <div className="inline">
+            <label htmlFor="year">Year:</label>
+            <div id="year" className="span--white">
+              {year}
+            </div>
+            <label htmlFor="district">District:</label>
+            <div id="district" className="span--white">
+              {district}
+            </div>
+            <label htmlFor="event-code">Event Code:</label>
+            <div id="event-code" className="span--white">
+              {eventCode}
+            </div>
+          </div>
+          <div className="inline">
+            <label htmlFor="match-number">Match Number:</label>
+            <select
+              name="matchNumber"
+              id="match-number"
+              value={matchNumber}
+              onChange={(e) => setMatchNumber(e.target.value)}
+            >
+              <option key="blank" value="">
+                Select
               </option>
-            ))}
-          </select>
-        </span>
-        <span>and</span>
-        <span>
-          <label htmlFor="match-number">Match Number</label>
-          <select
-            name="matchNumber"
-            id="match-number"
-            value={matchInfo.matchNumber}
-            onChange={handleInputChange}
-          >
-            <option key="blank" value="">
-              -- Select a Match --
-            </option>
-            {matchNumbers.map((code) => (
-              <option key={code} value={code}>
-                {code}
+              {matchNumbers.map((code) => (
+                <option key={code} value={code}>
+                  {code}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="tournament-level">Tournament Level: </label>
+            <select
+              id="tournament-level"
+              name="tournamentLevel"
+              value={tournamentLevel}
+              onChange={(e) => setTournamentLevel(e.target.value)}
+            >
+              {/* <option key="none" value="none">
+                None
               </option>
-            ))}
-          </select>
-        </span>
+              <option key="Practice" value="Practice">
+                Practice
+              </option> */}
+              <option key="Qualification" value="Qualification">
+                Qualification
+              </option>
+              <option key="Playoff" value="Playoff">
+                Playoff
+              </option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <button className="button--orange" type="submit">
+            Find Match
+          </button>
+        </div>
       </div>
-      <div>
-        {errorMessage ? (
-          <p className="error-message">{errorMessage}</p>
-        ) : (
-          <p></p>
-        )}
-      </div>
-      <div className="action-button-container">
-        <button type="submit">Find Match</button>
+      <div className="form-footer">
+        <p className="error-message">
+          <b>{error || " "}</b>
+        </p>
       </div>
     </form>
   );

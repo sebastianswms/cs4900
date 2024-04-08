@@ -1,0 +1,19 @@
+.team-selection-form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+  flex-grow: 1;
+  border-radius: 4px;
+  padding: 0.25em 1em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.station-div {
+  background-color: whiteSmoke;
+  padding: 0.5em;
+  border-radius: 4px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-right: 1em;
+}

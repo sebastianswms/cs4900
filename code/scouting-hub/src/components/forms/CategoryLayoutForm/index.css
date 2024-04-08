@@ -1,0 +1,33 @@
+.layout-form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+  background-color: #9a989a;
+  border-radius: 4px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.layout-form-title {
+  border-radius: 0.25em 0.25em 0em 0em;
+  min-height: 1.3em;
+  padding: 0.25em 1em;
+  background-color: #00003f;
+  color: whitesmoke;
+}
+
+.layout-form-context {
+  display: flex;
+  padding: 0.25em 1em;
+}
+
+.left-justified-div {
+  text-align: right;
+}
+
+.button-vertical {
+  color: green;
+  font-size: 2em;
+  width: 1em;
+  height: 100%;
+}
