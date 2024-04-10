@@ -61,6 +61,14 @@ contextBridge.exposeInMainWorld("database", {
     );
     return response;
   },
+  findAllByObject: async (tableName, object) => {
+    const response = await ipcRenderer.invoke(
+      "findAllByObject",
+      tableName,
+      object
+    );
+    return response;
+  },
   readAllRows: async (tableName) => {
     try {
       const results = await ipcRenderer.invoke("readAllRows", tableName);

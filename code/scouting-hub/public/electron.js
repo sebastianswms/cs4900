@@ -235,6 +235,24 @@ app.whenReady().then(() => {
     }
   });
 
+  ipcMain.handle("findAllByObject", async (event, tableName, object) => {
+    try {
+      const results = await new Promise((resolve, reject) => {
+        db.findAllByObject(tableName, object, (err, keys) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(keys);
+          }
+        });
+      });
+      return results;
+    } catch (err) {
+      console.error("Error [findAllByObject] into database:", err);
+      throw err;
+    }
+  });
+
   ipcMain.handle("readAllRows", async (event, tableName) => {
     try {
       const results = await new Promise((resolve, reject) => {

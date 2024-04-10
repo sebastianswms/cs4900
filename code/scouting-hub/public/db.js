@@ -114,6 +114,25 @@ class Database {
     callback(undefined, results);
   }
 
+  async findAllByObject(tableName, object, callback) {
+    const keys = Object.keys(object);
+    // const placeholders = keys.map(() => "?");
+    const query = `SELECT * FROM ${tableName} WHERE ${keys.join(
+      " = ? AND "
+    )} = ?`;
+    const values = keys.map((key) => object[key]);
+    const results = await new Promise((resolve, reject) => {
+      this.db.all(query, values, (err, row) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(row);
+        }
+      });
+    });
+    callback(undefined, results);
+  }
+
   readAllRows(tableName, callback) {
     const query = `SELECT * FROM ${tableName}`;
     this.db.all(query, callback);
