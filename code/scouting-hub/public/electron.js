@@ -9,14 +9,14 @@ const {
 const fs = require("fs");
 const fsp = require("fs").promises;
 const csv = require("csv-parser");
+const path = require("path");
 const db = require("./db");
 
 let mainWindow;
-
+console.log(__dirname);
+// userData is the only place for editable data, can change to internal area for storing passwords
+const configPath = path.join(app.getPath("userData"), "config.json");
 // need a dev mode version of these variable to work without a full build
-const configPath = app.isPackaged
-  ? `${__dirname}/../build/config.json`
-  : `${__dirname}/../public/config.json`;
 const preloadPath = app.isPackaged
   ? `${__dirname}/../build/preload.js`
   : `${__dirname}/../public/preload.js`;
@@ -64,22 +64,22 @@ const createWindow = () => {
   }
 };
 
-function setupLocalFilesNormalizerProxy() {
-  protocol.registerHttpProtocol(
-    "file",
-    (request, callback) => {
-      const url = request.url.substr(8);
-      callback({ path: `${__dirname}/${url}` });
-    },
-    (error) => {
-      if (error) console.error("Failed to register protocol");
-    }
-  );
-}
+// function setupLocalFilesNormalizerProxy() {
+//   protocol.registerHttpProtocol(
+//     "file",
+//     (request, callback) => {
+//       const url = request.url.substr(8);
+//       callback({ path: `${__dirname}/${url}` });
+//     },
+//     (error) => {
+//       if (error) console.error("Failed to register protocol");
+//     }
+//   );
+// }
 
 app.whenReady().then(() => {
   createWindow();
-  setupLocalFilesNormalizerProxy();
+  //setupLocalFilesNormalizerProxy();
 
   ipcMain.handle("api-get", async (event, { url }) => {
     const jsonData = await fsp.readFile(configPath, "utf8");
@@ -149,7 +149,27 @@ app.whenReady().then(() => {
   });
 
   ipcMain.handle("readConfig", async (event) => {
-    return await JSON.parse(fs.readFileSync(configPath, "utf8"));
+    const defaultConfig = {
+      API_USERNAME: "hoken",
+      API_AUTHORIZATION_TOKEN: "668bedaf-eb33-4dd0-bf4d-79a5094daaf5",
+      CURRENT_YEAR: "2022",
+      CURRENT_EVENT_CODE: "MIGUL",
+      LAYOUT: "ChargedUp",
+      DISTRICT: "FIM",
+    };
+    function getConfig(defaultConfig) {
+      try {
+        return JSON.parse(fs.readFileSync(configPath, "utf8"));
+      } catch (err) {
+        if (err.code === "ENOENT") {
+          fs.writeFileSync(configPath, JSON.stringify(defaultConfig));
+          return defaultConfig;
+        } else {
+          throw err;
+        }
+      }
+    }
+    return await getConfig(defaultConfig);
   });
 
   ipcMain.handle("writeConfig", async (event, jsonData) => {

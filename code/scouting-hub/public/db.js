@@ -1,5 +1,7 @@
+const { app } = require("electron");
 const sqlite3 = require("sqlite3").verbose();
 const schemas = require("./dbSchema");
+const path = require("path");
 
 function generateRandomNumber() {
   const chars =
@@ -12,6 +14,8 @@ function generateRandomNumber() {
 
   return result;
 }
+
+const dbPath = path.join(app.getPath("userData"), "database.sqlite3");
 
 class Database {
   constructor(dbFile) {
@@ -139,4 +143,4 @@ class Database {
   }
 }
 
-module.exports = new Database("database.sqlite3");
+module.exports = new Database(dbPath);

@@ -6,38 +6,76 @@ import TeamSortableTable from "../../components/tables/teamSortableTable";
 import AllianceSelectionForm from "../../components/forms/allianceSelectionForm";
 import AllianceSelectionDisplay from "../../components/tables/allianceSelectionDisplay";
 
+const blankTeam = [
+  {
+    team: "",
+    name: "",
+    group0Label: "",
+    group0Data: { labels: [], data: [] },
+    group1Label: "",
+    group1Data: { labels: [], data: [] },
+    group2Label: "",
+    group2Data: { labels: [], data: [] },
+    group3Label: "",
+    group3Data: { labels: [], data: [] },
+    group4Label: "",
+    group4Data: { labels: [], data: [] },
+  },
+];
+
 export default function AllianceSelectionPage() {
-  const [teamData, setTeamData] = useState([]);
+  const [teamData, setTeamData] = useState(blankTeam);
   const [optionsArray, setOptionsArray] = useState([]);
-  const [layout, setLayout] = useState(null);
-  const [settings, setSettings] = useState({});
+  const [layout, setLayout] = useState({ categories: ["", "", "", "", ""] });
+  const [settings, setSettings] = useState(null);
+
+  const fetchConfig = async () => {
+    try {
+      const results = await window.envConfig.readConfig();
+      setSettings({ ...results });
+    } catch (err) {
+      //setError(err.message);
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    async function fetchData() {
-      
-      await window.evnConfig.readConfig().then((data)=> {
-            console.log(data); 
-            setSettings(data)
-      });
-
-      await window.database.findByObject("layouts", { name: settings.LAYOUT }.then((layout)=> {
-            console.log(layout);
-            const parsedLayout = parseLayout(layout);
-            setLayout(parsedLayout);
-      }));
-      
-      await window.database.findByObject("scores", { layoutID: layout }.then((scores)=> {
-            console.log(scores);
-            const parsedScores = parseScores(scores);
-            setTeamData(parsedScores);
-
-      }));
-
-      const teamData = parseTeamData(teamData, layout);
-      
+    if (layout?.id === undefined) {
+      return;
     }
+    const fetchScores = async () => {
+      try {
+        const id = { layoutID: layout.id };
+        const results = await window.database.findAllByObject("scores", id);
+        console.log(results); //*****remove*****
+      } catch (err) {
+        //setError(err.message);
+        console.log(err);
+      }
+    };
+    fetchScores();
+  }, [layout]);
 
-    fetchData();
+  useEffect(() => {
+    if (settings?.LAYOUT === undefined) {
+      return;
+    }
+    const fetchLayout = async () => {
+      try {
+        const name = { name: settings?.LAYOUT };
+        const results = await window.database.findByObject("layouts", name);
+        setLayout({ ...results });
+      } catch (err) {
+        //setError(err.message);
+        console.log(err);
+      }
+    };
+
+    fetchLayout();
+  }, [settings]);
+
+  useEffect(() => {
+    fetchConfig();
   }, []);
 
   const sortTable = (group, index) => {
@@ -68,70 +106,73 @@ export default function AllianceSelectionPage() {
     layout.categories = JSON.parse(layout.categories);
 
     for (let i = 0; i < 5; i++) {
-        const subCategoryKey = `subCategories${i}`;
-        if (layout.hasOwnProperty(subCategoryKey) && layout[subCategoryKey]) {
-            layout[subCategoryKey] = JSON.parse(layout[subCategoryKey]);
-        }
+      const subCategoryKey = `subCategories${i}`;
+      if (layout.hasOwnProperty(subCategoryKey) && layout[subCategoryKey]) {
+        layout[subCategoryKey] = JSON.parse(layout[subCategoryKey]);
+      }
     }
 
     for (let i = 0; i < 5; i++) {
-        const headerKey = `headers${i}`;
-        if (layout.hasOwnProperty(headerKey) && layout[headerKey]) {
-            layout[headerKey] = JSON.parse(layout[headerKey]);
-        }
+      const headerKey = `headers${i}`;
+      if (layout.hasOwnProperty(headerKey) && layout[headerKey]) {
+        layout[headerKey] = JSON.parse(layout[headerKey]);
+      }
     }
 
     return layout;
-}
+  }
 
-function parseScores(scores) {
-  return scores.map(score => {
-      Object.keys(score).forEach(key => {
-          if (Array.isArray(score[key]) && typeof score[key][0] === 'string') {
-              score[key] = score[key].map(value => JSON.parse(value));
-          }
+  function parseScores(scores) {
+    return scores.map((score) => {
+      Object.keys(score).forEach((key) => {
+        if (Array.isArray(score[key]) && typeof score[key][0] === "string") {
+          score[key] = score[key].map((value) => JSON.parse(value));
+        }
       });
       return score;
-  });
-}
+    });
+  }
 
-function parseTeamData(parsedScores, parsedLayout) {
-  return parsedScores.map(score => {
+  function parseTeamData(parsedScores, parsedLayout) {
+    return parsedScores.map((score) => {
       const teamData = {};
-      
-      Object.keys(parsedLayout).forEach(key => {
-          if (key !== 'tableName' && key !== 'columns') {
-              teamData[key] = parsedLayout[key];
-          }
+
+      Object.keys(parsedLayout).forEach((key) => {
+        if (key !== "tableName" && key !== "columns") {
+          teamData[key] = parsedLayout[key];
+        }
       });
-      
-      parsedLayout.columns.forEach(column => {
-          if (column.name.startsWith('data')) {
-              const groupIndex = parseInt(column.name.substring(4));
-              const groupLabel = parsedLayout.categories[groupIndex];
-              const groupData = score[column.name];
-              
-              teamData[`group${groupIndex}Label`] = groupLabel;
-              teamData[`group${groupIndex}Data`] = { labels: groupData.labels, data: groupData.data };
-          }
+
+      parsedLayout.columns.forEach((column) => {
+        if (column.name.startsWith("data")) {
+          const groupIndex = parseInt(column.name.substring(4));
+          const groupLabel = parsedLayout.categories[groupIndex];
+          const groupData = score[column.name];
+
+          teamData[`group${groupIndex}Label`] = groupLabel;
+          teamData[`group${groupIndex}Data`] = {
+            labels: groupData.labels,
+            data: groupData.data,
+          };
+        }
       });
-      
+
       return teamData;
-  });
-}
+    });
+  }
 
   return (
     <div className="page">
       <div>
         <Navbar />
       </div>
-      <div class="page-container">
-        <div class="container">
-          <div class="header">
+      <div className="page-container">
+        <div className="container">
+          <div className="header">
             <h1>Alliance Selection</h1>
           </div>
         </div>
-        <div class="team-table-container">
+        {/* <div className="team-table-container">
           <TeamSortableTable
             teamData={teamData}
             group={"group0Data"}
@@ -165,14 +206,16 @@ function parseTeamData(parsedScores, parsedLayout) {
           />
         </div>
         <div className="print-button-container">
-          <button className="print-button" onClick={() => window.print()}>Print</button>
+          <button className="print-button" onClick={() => window.print()}>
+            Print
+          </button>
         </div>
-        <div class="container" style={{ minHeight: '160px' }}>
+        <div className="container" style={{ minHeight: "160px" }}>
           <div className="header">
             <h2>Alliance Builder</h2>
           </div>
-          <div class="alliance-builder-container">
-            <div class="center">
+          <div className="alliance-builder-container">
+            <div className="center">
               <div className="forms-container">
                 <AllianceSelectionForm
                   teamData={teamData}
@@ -181,7 +224,7 @@ function parseTeamData(parsedScores, parsedLayout) {
                 />
               </div>
             </div>
-            <div class="center">
+            <div className="center">
               <div className="alliance-container">
                 <AllianceSelectionDisplay
                   optionsArray={optionsArray}
@@ -190,7 +233,7 @@ function parseTeamData(parsedScores, parsedLayout) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
