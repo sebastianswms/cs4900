@@ -1,12 +1,19 @@
 import "./index.css";
 import React, { useState, useEffect } from "react";
 
-function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
+function MatchSelectionForm({
+  setRedAlliance,
+  setBlueAlliance,
+  setLayout,
+  setMatch,
+  setEvent,
+}) {
   const [year, setYear] = useState("");
   const [district, setDistrict] = useState("");
   const [eventCode, setEventCode] = useState("");
   const [matchNumber, setMatchNumber] = useState("");
   const [tournamentLevel, setTournamentLevel] = useState("Qualification");
+  const [layoutID, setLayoutID] = useState(null);
 
   const [matchNumbers, setMatchNumbers] = useState([]);
   const [error, setError] = useState("");
@@ -14,7 +21,6 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
   const getTeams = async (e) => {
     e.preventDefault();
     if (matchNumber === "" || tournamentLevel === "") {
-      //todo: add for all values true to prevent bad searches
       setError("Please select a <Match Number> and <Tournament Level>");
       setRedAlliance([]);
       setBlueAlliance([]);
@@ -40,6 +46,18 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
     //print error if team not found, or non valid form submit
   };
 
+  const parseSpecificValues = async (obj, keys) => {
+    const result = {};
+    for (const property in obj) {
+      if (!keys.includes(property)) {
+        result[property] = JSON.parse(obj[property]);
+      } else {
+        result[property] = obj[property];
+      }
+    }
+    return result;
+  };
+
   const fetchSettings = async () => {
     try {
       const settings = await window.envConfig.readConfig();
@@ -47,20 +65,55 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
       setYear(settings.CURRENT_YEAR);
       setDistrict(settings.DISTRICT);
       setEventCode(settings.CURRENT_EVENT_CODE);
+      setEvent(settings.CURRENT_EVENT_CODE.toLowerCase());
+      setLayoutID(settings.LAYOUT_ID);
     } catch (err) {
       setError(err.message);
     }
   };
 
-  const getMatchNumbers = async () => {
+  const getMatchNumbers = async (year, eventCode, tournamentLevel) => {
+    function compareNumbers(a, b) {
+      return Number(a) - Number(b);
+    }
     try {
-      const results = await window.database.findAllDistinct(
+      const results = await window.database.findAllDistinctValues(
         "matches",
-        "match_number"
+        "match_number",
+        { year: year, event_code: eventCode, tournament_level: tournamentLevel }
       );
-
+      if (results.length === 0) {
+        setError("No matches found in Database");
+        setMatchNumbers([]);
+        return;
+      }
       setError(undefined);
-      setMatchNumbers(results);
+      setMatchNumbers(results.sort(compareNumbers));
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const getLayout = async (id) => {
+    try {
+      const results = await window.database.findByObject("layouts", {
+        id,
+      });
+      if (results === undefined) {
+        setError("Layout was not found in Database");
+        setLayout(null);
+        return;
+      }
+      const layout = await parseSpecificValues(results, [
+        "id",
+        "name",
+        "year",
+        "eventCode",
+        "teamNumber",
+        "teamName",
+      ]);
+      setLayout({ ...layout });
+      setError(undefined);
     } catch (err) {
       setError(err.message);
     }
@@ -68,15 +121,36 @@ function MatchSelectionForm({ setRedAlliance, setBlueAlliance }) {
 
   useEffect(() => {
     fetchSettings();
-    getMatchNumbers();
   }, []);
+
+  useEffect(() => {
+    setMatch(matchNumber);
+  }, [matchNumber]);
+
+  useEffect(() => {
+    if (year === "" || eventCode === "" || tournamentLevel === "") {
+      setError("Invalid match configuration data!!!");
+      return;
+    }
+    setError(undefined);
+    setMatchNumber("");
+    getMatchNumbers(year, eventCode, tournamentLevel);
+  }, [year, eventCode, tournamentLevel]);
+
+  useEffect(() => {
+    if (layoutID === null || layoutID === "") {
+      setError("Invalid layout configuration data!!!");
+      return;
+    }
+    setError(undefined);
+    getLayout(layoutID);
+  }, [layoutID]);
 
   return (
     <form className="form-container" onSubmit={getTeams}>
       <div className="form-title">
-        <h3>Report Selection</h3>
+        <h3>Match</h3>
       </div>
-      <form onSubmit={getTeams}></form>
       <div className="form-context">
         <div>
           <div className="inline">

@@ -401,6 +401,7 @@ export default function CSVDataPage() {
                   onChange={(e) => setYear(e.target.value)}
                 />
               </div>
+              {/* this set the column to be read and the the value */}
               <div className="space-between">
                 <label htmlFor="event-code">Event Code: </label>
                 <select

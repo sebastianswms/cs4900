@@ -7,23 +7,17 @@ import AllianceBar from "../../components/charts/AllianceBar";
 import Navbar from "../../components/Navbar";
 import MatchSelectionForm from "../../components/forms/MatchSelectionForm";
 import TeamSelectionForm from "../../components/forms/TeamSelectionForm";
-import SortableTable from "../../components/tables/sortableTable";
-import { teamData as importedTeamData, labels } from "../../data/teamData";
+import SimpleTable from "../../components/tables/simpleTable";
 import MatchTeamTable from "../../components/tables/matchTeamTable";
 
 function MatchReportPage() {
   const [redAlliance, setRedAlliance] = useState([]);
   const [blueAlliance, setBlueAlliance] = useState([]);
-  const [teamData, setTeamData] = useState(importedTeamData.slice(0, 6));
-
-  const sortTable = (group, index) => {
-    const sorted = teamData.toSorted((a, b) => {
-      const valA = a[group]["data"][index];
-      const valB = b[group]["data"][index];
-      return valB - valA;
-    });
-    setTeamData(sorted);
-  };
+  const [redData, setRedData] = useState([]);
+  const [blueData, setBlueData] = useState([]);
+  const [layout, setLayout] = useState(null);
+  const [matchNumber, setMatchNumber] = useState(-1);
+  const [eventCode, setEventCode] = useState("");
 
   return (
     <div className="page">
@@ -36,20 +30,29 @@ function MatchReportPage() {
           <MatchSelectionForm
             setBlueAlliance={setBlueAlliance}
             setRedAlliance={setRedAlliance}
+            setLayout={setLayout}
+            setMatch={setMatchNumber}
+            setEvent={setEventCode}
           />
         </div>
         <div className="no-print" style={{ display: "flex", gap: "1em" }}>
           <TeamSelectionForm
             name={"Red Alliance"}
+            color={"#ED1C24"}
             teams={redAlliance}
             setAlliance={setRedAlliance}
-            color={"#ED1C24"}
+            setData={setRedData}
+            id={layout?.id}
+            event={eventCode}
           />
           <TeamSelectionForm
             name={"Blue Alliance"}
+            color={"#0066B3"}
             teams={blueAlliance}
             setAlliance={setBlueAlliance}
-            color={"#0066B3"}
+            setData={setBlueData}
+            id={layout?.id}
+            event={eventCode}
           />
         </div>
         <div className="print-button-container no-print">
@@ -61,56 +64,97 @@ function MatchReportPage() {
           </button>
         </div>
         <div className="match-report">
-          <div className="top-table">
+          <div
+            className="top-table"
+            style={{ display: "flex", flexGrow: "1", width: "100%" }}
+          >
             <MatchTeamTable
-              teamData={teamData}
-              matchInfo={{ matchCode: "2023micmp", matchNumber: "45" }}
-              redAlliance={redAlliance}
-              blueAlliance={blueAlliance}
+              eventCode={eventCode}
+              matchNumber={matchNumber}
+              redData={redData || []}
+              blueData={blueData || []}
             />
-            <SortableTable
-              teamData={teamData}
-              group={"group0Data"}
-              category={labels[0]}
-              sortTable={sortTable}
+            <SimpleTable
+              category={layout?.categories[0]}
+              subCategories={layout?.subCategories0 || []}
+              data={[
+                redData[0]?.data0,
+                redData[1]?.data0,
+                redData[2]?.data0,
+                blueData[0]?.data0,
+                blueData[1]?.data0,
+                blueData[2]?.data0,
+              ]}
             />
-            <SortableTable
-              teamData={teamData}
-              group={"group1Data"}
-              category={labels[1]}
-              sortTable={sortTable}
+            <SimpleTable
+              category={layout?.categories[1]}
+              subCategories={layout?.subCategories1 || []}
+              data={[
+                redData[0]?.data1,
+                redData[1]?.data1,
+                redData[2]?.data1,
+                blueData[0]?.data1,
+                blueData[1]?.data1,
+                blueData[2]?.data1,
+              ]}
             />
-            <SortableTable
-              teamData={teamData}
-              group={"group2Data"}
-              category={labels[2]}
-              sortTable={sortTable}
+            <SimpleTable
+              category={layout?.categories[2]}
+              subCategories={layout?.subCategories2 || []}
+              data={[
+                redData[0]?.data2,
+                redData[1]?.data2,
+                redData[2]?.data2,
+                blueData[0]?.data2,
+                blueData[1]?.data2,
+                blueData[2]?.data2,
+              ]}
             />
-            <SortableTable
-              teamData={teamData}
-              group={"group3Data"}
-              category={labels[3]}
-              sortTable={sortTable}
+            <SimpleTable
+              category={layout?.categories[3]}
+              subCategories={layout?.subCategories3 || []}
+              data={[
+                redData[0]?.data3,
+                redData[1]?.data3,
+                redData[2]?.data3,
+                blueData[0]?.data3,
+                blueData[1]?.data3,
+                blueData[2]?.data3,
+              ]}
             />
-            <SortableTable
-              teamData={teamData}
-              group={"group3Data"}
-              category={labels[4]}
-              sortTable={sortTable}
+            <SimpleTable
+              category={layout?.categories[4]}
+              subCategories={layout?.subCategories4 || []}
+              data={[
+                redData[0]?.data4,
+                redData[1]?.data4,
+                redData[2]?.data4,
+                blueData[0]?.data4,
+                blueData[1]?.data4,
+                blueData[2]?.data4,
+              ]}
             />
           </div>
           <div className="area-one">
             <AlliancePie
               title={"Red Alliance"}
-              teams={["4779", "2054", "5675"]}
-              values={[31.6, 33.5, 34.9]}
+              teams={redAlliance}
+              values={[
+                redData[0]?.data0[0],
+                redData[1]?.data0[0],
+                redData[2]?.data0[0],
+              ]}
             />
           </div>
           <div className="area-two">
             <AlliancePie
               title={"Blue Alliance"}
-              teams={["3539", "3534", "5436"]}
-              values={[38.2, 32.7, 29.1]}
+              teams={blueAlliance}
+              values={[
+                blueData[0]?.data0[0],
+                blueData[1]?.data0[0],
+                blueData[2]?.data0[0],
+              ]}
             />
           </div>
           <div className="area-three">
@@ -125,7 +169,7 @@ function MatchReportPage() {
           <div className="area-four">
             <AllianceStackBar
               title={"Auto Charge Station"}
-              teams={["4779", "2054", "5675", "3539", "3534", "5436"]}
+              teams={[...redAlliance, ...blueAlliance]}
               values={[
                 [30, 40, 30],
                 [10, 60, 30],
@@ -140,7 +184,7 @@ function MatchReportPage() {
           <div className="area-five">
             <AllianceStackBar
               title={"Tele Charge Station"}
-              teams={["4779", "2054", "5675", "3539", "3534", "5436"]}
+              teams={[...redAlliance, ...blueAlliance]}
               values={[
                 [25, 25, 25, 25],
                 [20, 30, 25, 25],
@@ -155,14 +199,14 @@ function MatchReportPage() {
           <div className="area-six">
             <AllianceBar
               title={"Mobility %"}
-              teams={["4779", "2054", "5675", "3534", "3534", "5436"]}
+              teams={[...redAlliance, ...blueAlliance]}
               values={[90, 80, 100, 83, 100, 100]}
             />
           </div>
           <div className="area-seven">
             <AllianceStackBar
               title={"Cone and Cube Percent"}
-              teams={["4779", "2054", "5675", "3539", "3534", "5436"]}
+              teams={[...redAlliance, ...blueAlliance]}
               values={[
                 [50, 50],
                 [60, 40],
@@ -177,10 +221,7 @@ function MatchReportPage() {
           <div className="area-eight">
             <AllianceStackBarTeams
               title="Average Points"
-              teams={[
-                ["4779", "2054", "5675"],
-                ["3539", "3534", "5436"],
-              ]}
+              teams={[redAlliance, blueAlliance]}
               values={[
                 [48, 48, 44],
                 [55, 45, 55],

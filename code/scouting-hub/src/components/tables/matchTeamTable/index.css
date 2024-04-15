@@ -1,0 +1,30 @@
+.table--blue table {
+  border: 1px solid;
+  border-collapse: collapse;
+  flex: 1;
+}
+
+.table--blue th {
+  font-size: 0.8em;
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 0.5ch;
+  white-space: nowrap;
+  background-color: #4660af;
+  color: white;
+}
+
+.table--blue tr {
+  font-size: 1em;
+  border: 1px solid black;
+  text-align: center;
+  padding: 0.5ch;
+}
+
+.table--blue > td {
+  font-size: 1em;
+  border: 1px solid black;
+  text-align: center;
+  padding: 0.5ch;
+}

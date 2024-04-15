@@ -14,7 +14,12 @@ function SortableTable({ teamData, group, category, sortTable }) {
         </tr>
         <tr>
           {teamData[0][group]["labels"].map((label, index) => (
-            <th key={index} className="SortableTables" data-testid="sort-button" onClick={() => sortTable(group, index)}>
+            <th
+              key={index}
+              className="SortableTables"
+              data-testid="sort-button"
+              onClick={() => sortTable(group, index)}
+            >
               {label}
             </th>
           ))}

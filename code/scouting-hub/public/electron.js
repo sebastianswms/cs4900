@@ -13,9 +13,9 @@ const path = require("path");
 const db = require("./db");
 
 let mainWindow;
-console.log(__dirname);
 // userData is the only place for editable data, can change to internal area for storing passwords
 const configPath = path.join(app.getPath("userData"), "config.json");
+console.log(configPath);
 // need a dev mode version of these variable to work without a full build
 const preloadPath = app.isPackaged
   ? `${__dirname}/../build/preload.js`
@@ -152,9 +152,10 @@ app.whenReady().then(() => {
     const defaultConfig = {
       API_USERNAME: "hoken",
       API_AUTHORIZATION_TOKEN: "668bedaf-eb33-4dd0-bf4d-79a5094daaf5",
-      CURRENT_YEAR: "2022",
-      CURRENT_EVENT_CODE: "MIGUL",
+      CURRENT_YEAR: "2023",
+      CURRENT_EVENT_CODE: "MISJO",
       LAYOUT: "ChargedUp",
+      LAYOUT_ID: "3Vu9o7BPghtP4VeG",
       DISTRICT: "FIM",
     };
     function getConfig(defaultConfig) {
@@ -219,23 +220,26 @@ app.whenReady().then(() => {
     }
   });
 
-  ipcMain.handle("findAllDistinct", async (event, tableName, keyName) => {
-    try {
-      const results = await new Promise((resolve, reject) => {
-        db.findAllDistinct(tableName, keyName, (err, keys) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(keys);
-          }
+  ipcMain.handle(
+    "findAllDistinctValues",
+    async (event, tableName, keyName, object) => {
+      try {
+        const results = await new Promise((resolve, reject) => {
+          db.findAllDistinctValues(tableName, keyName, object, (err, keys) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(keys);
+            }
+          });
         });
-      });
-      return results;
-    } catch (err) {
-      console.error("Error [findAllDistinct] into database:", err);
-      throw err;
+        return results;
+      } catch (err) {
+        console.error("Error [findAllDistinctValues] into database:", err);
+        throw err;
+      }
     }
-  });
+  );
 
   ipcMain.handle("findByObject", async (event, tableName, object) => {
     try {

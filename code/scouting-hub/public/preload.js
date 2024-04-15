@@ -45,11 +45,12 @@ contextBridge.exposeInMainWorld("database", {
     const response = await ipcRenderer.invoke("upsertOne", tableName, element);
     return response;
   },
-  findAllDistinct: async (tableName, keyName) => {
+  findAllDistinctValues: async (tableName, keyName, object) => {
     const response = await ipcRenderer.invoke(
-      "findAllDistinct",
+      "findAllDistinctValues",
       tableName,
-      keyName
+      keyName,
+      object
     );
     return response;
   },

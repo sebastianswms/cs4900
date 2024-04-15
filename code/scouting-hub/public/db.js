@@ -16,6 +16,7 @@ function generateRandomNumber() {
 }
 
 const dbPath = path.join(app.getPath("userData"), "database.sqlite3");
+console.log(dbPath);
 
 class Database {
   constructor(dbFile) {
@@ -83,18 +84,20 @@ class Database {
     });
   }
 
-  async findAllDistinct(tableName, keyName, callback) {
+  async findAllDistinctValues(tableName, keyName, object, callback) {
+    const keys = Object.keys(object);
+    const values = keys.map((key) => object[key]);
+    const query = `SELECT ${keyName} FROM ${tableName} WHERE ${keys.join(
+      " = ? AND "
+    )} = ?`;
     const results = await new Promise((resolve, reject) => {
-      this.db.all(
-        `SELECT DISTINCT ${keyName} FROM ${tableName}`,
-        (err, rows) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(rows.map((row) => row[keyName]));
-          }
+      this.db.all(query, values, (err, rows) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows.map((row) => row[keyName]));
         }
-      );
+      });
     });
     callback(undefined, results);
   }

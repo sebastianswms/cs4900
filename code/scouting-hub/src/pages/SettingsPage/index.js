@@ -108,6 +108,15 @@ export default function SettingsPage() {
                 onChange={handleChange}
               ></input>
             </div>
+            <div className="space-between">
+              <label htmlFor="layout-id">Layout ID</label>
+              <input
+                id="layout-id"
+                name="LAYOUT_ID"
+                value={data.LAYOUT_ID || ""}
+                onChange={handleChange}
+              ></input>
+            </div>
           </div>
           <div style={{ alignSelf: "flex-end", margin: "0.25em 1em 1em 0em" }}>
             <button className="button--orange" type="submit">
