@@ -27,7 +27,7 @@ export default function AllianceSelectionPage() {
   const [teamData, setTeamData] = useState(blankTeam);
   const [optionsArray, setOptionsArray] = useState([]);
   const [layout, setLayout] = useState({ categories: ["", "", "", "", ""] });
-  const [settings, setSettings] = useState(null);
+  const [settings, setSettings] = useState({});
 
   const fetchConfig = async () => {
     try {
@@ -45,8 +45,9 @@ export default function AllianceSelectionPage() {
     }
     const fetchScores = async () => {
       try {
-        const id = { layoutID: layout.id };
-        const results = await window.database.findAllByObject("scores", id);
+        const results = await window.database.findAllByObject("scores", {
+          layoutID: layout.id,
+        });
         console.log(results); //*****remove*****
       } catch (err) {
         //setError(err.message);
@@ -61,10 +62,13 @@ export default function AllianceSelectionPage() {
       return;
     }
     const fetchLayout = async () => {
+      console.log(settings.LAYOUT);
       try {
-        const name = { name: settings?.LAYOUT };
-        const results = await window.database.findByObject("layouts", name);
+        const results = await window.database.findByObject("layouts", {
+          name: settings?.LAYOUT,
+        });
         setLayout({ ...results });
+        console.log(layout);
       } catch (err) {
         //setError(err.message);
         console.log(err);

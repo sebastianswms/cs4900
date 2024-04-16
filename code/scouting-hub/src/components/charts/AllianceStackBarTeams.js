@@ -75,7 +75,7 @@ export default function AllianceStackBarTeams({
       y: {
         stacked: true,
         ticks: {
-          stepSize: 50,
+          stepSize: 25,
         },
       },
     },

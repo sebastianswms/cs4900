@@ -16,7 +16,6 @@ export default function SettingsPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(data);
     try {
       await window.envConfig.writeConfig(data);
     } catch (err) {
@@ -27,7 +26,6 @@ export default function SettingsPage() {
   useEffect(() => {
     try {
       window.envConfig.readConfig().then((data) => {
-        console.log(data);
         setData({ ...data });
       });
     } catch (err) {

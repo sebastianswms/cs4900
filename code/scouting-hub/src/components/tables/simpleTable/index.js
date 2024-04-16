@@ -6,7 +6,7 @@ function SimpleTable({ category, subCategories, data }) {
   return (
     <table
       style={{
-        border: "1px solid",
+        border: "1px solid black",
         borderCollapse: "collapse",
         flex: 1,
       }}

@@ -6,8 +6,9 @@ function MatchTeamTable({ eventCode, matchNumber, redData, blueData }) {
     <table
       className="table--blue"
       style={{
-        border: "1px solid",
+        border: "1px solid black",
         borderCollapse: "collapse",
+        flex: 1,
       }}
     >
       <thead>
@@ -18,7 +19,12 @@ function MatchTeamTable({ eventCode, matchNumber, redData, blueData }) {
           </th>
         </tr>
         <tr>
-          <th className="table--blue">Match: {matchNumber}</th>
+          <th
+            className="table--blue"
+            style={{ width: "10ch", textAlign: "left" }}
+          >
+            Match: {matchNumber}
+          </th>
           <th className="table--blue">#</th>
           <th className="table--blue">Name</th>
         </tr>

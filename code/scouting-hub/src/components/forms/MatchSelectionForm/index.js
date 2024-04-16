@@ -4,33 +4,40 @@ import React, { useState, useEffect } from "react";
 function MatchSelectionForm({
   setRedAlliance,
   setBlueAlliance,
+  layout,
   setLayout,
   setMatch,
   setEvent,
 }) {
-  const [year, setYear] = useState("");
-  const [district, setDistrict] = useState("");
-  const [eventCode, setEventCode] = useState("");
+  //state need year, district, event code
+  const [settings, setSettings] = useState(null);
+  //user input state
   const [matchNumber, setMatchNumber] = useState("");
   const [tournamentLevel, setTournamentLevel] = useState("Qualification");
   const [layoutID, setLayoutID] = useState(null);
-
+  //selector state
   const [matchNumbers, setMatchNumbers] = useState([]);
+  const [layouts, setLayouts] = useState([]);
+
   const [error, setError] = useState("");
 
   const getTeams = async (e) => {
-    e.preventDefault();
-    if (matchNumber === "" || tournamentLevel === "") {
-      setError("Please select a <Match Number> and <Tournament Level>");
+    if (
+      matchNumber === "" ||
+      tournamentLevel === "" ||
+      layout?.name === undefined
+    ) {
+      setError("Please select a both <Match Number> and <Layout>");
       setRedAlliance([]);
       setBlueAlliance([]);
+      setMatch("");
     } else {
       setError(null);
       try {
         const results = await window.database.findByObject("matches", {
-          year,
-          district,
-          event_code: eventCode,
+          year: settings?.CURRENT_YEAR,
+          district: settings?.DISTRICT,
+          event_code: settings?.CURRENT_EVENT_CODE,
           tournament_level: tournamentLevel,
           match_number: matchNumber,
         });
@@ -42,8 +49,6 @@ function MatchSelectionForm({
         setBlueAlliance([]);
       }
     }
-    //find match schedule in DB , if error don't set team.
-    //print error if team not found, or non valid form submit
   };
 
   const parseSpecificValues = async (obj, keys) => {
@@ -58,15 +63,11 @@ function MatchSelectionForm({
     return result;
   };
 
-  const fetchSettings = async () => {
+  const fetchLayouts = async () => {
     try {
-      const settings = await window.envConfig.readConfig();
+      const results = await window.database.readAllRows("layouts");
+      setLayouts(results);
       setError(undefined);
-      setYear(settings.CURRENT_YEAR);
-      setDistrict(settings.DISTRICT);
-      setEventCode(settings.CURRENT_EVENT_CODE);
-      setEvent(settings.CURRENT_EVENT_CODE.toLowerCase());
-      setLayoutID(settings.LAYOUT_ID);
     } catch (err) {
       setError(err.message);
     }
@@ -80,7 +81,11 @@ function MatchSelectionForm({
       const results = await window.database.findAllDistinctValues(
         "matches",
         "match_number",
-        { year: year, event_code: eventCode, tournament_level: tournamentLevel }
+        {
+          year: settings?.CURRENT_YEAR,
+          event_code: settings?.CURRENT_EVENT_CODE,
+          tournament_level: tournamentLevel,
+        }
       );
       if (results.length === 0) {
         setError("No matches found in Database");
@@ -94,60 +99,64 @@ function MatchSelectionForm({
     }
   };
 
-  const getLayout = async (id) => {
+  const updateMatchNumber = async (match) => {
+    setMatch(match);
+    setMatchNumber(match);
+  };
+
+  const updateLayout = async (id) => {
+    const result = layouts.find((object) => object["id"] === id);
+    const layout = await parseSpecificValues(result, [
+      "id",
+      "name",
+      "year",
+      "eventCode",
+      "teamNumber",
+      "teamName",
+    ]);
+    setLayout(layout);
+  };
+
+  const fetchSettings = async () => {
     try {
-      const results = await window.database.findByObject("layouts", {
-        id,
-      });
-      if (results === undefined) {
-        setError("Layout was not found in Database");
-        setLayout(null);
-        return;
-      }
-      const layout = await parseSpecificValues(results, [
-        "id",
-        "name",
-        "year",
-        "eventCode",
-        "teamNumber",
-        "teamName",
-      ]);
-      setLayout({ ...layout });
+      const settings = await window.envConfig.readConfig();
       setError(undefined);
+      setSettings(settings);
+      setEvent(settings.CURRENT_EVENT_CODE.toLowerCase());
     } catch (err) {
       setError(err.message);
     }
   };
 
   useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  useEffect(() => {
-    setMatch(matchNumber);
-  }, [matchNumber]);
-
-  useEffect(() => {
-    if (year === "" || eventCode === "" || tournamentLevel === "") {
+    if (
+      settings?.CURRENT_YEAR === undefined ||
+      settings?.CURRENT_EVENT_CODE === undefined ||
+      tournamentLevel === ""
+    ) {
       setError("Invalid match configuration data!!!");
       return;
     }
     setError(undefined);
     setMatchNumber("");
-    getMatchNumbers(year, eventCode, tournamentLevel);
-  }, [year, eventCode, tournamentLevel]);
+    getMatchNumbers(
+      settings?.CURRENT_YEAR,
+      settings?.CURRENT_EVENT_CODE,
+      tournamentLevel
+    );
+  }, [settings?.CURRENT_YEAR, settings?.CURRENT_EVENT_CODE, tournamentLevel]);
 
   useEffect(() => {
-    if (layoutID === null || layoutID === "") {
-      setError("Invalid layout configuration data!!!");
-      return;
-    }
-    setError(undefined);
-    getLayout(layoutID);
-  }, [layoutID]);
+    getTeams();
+  }, [matchNumber, layout?.id]);
+
+  useEffect(() => {
+    fetchSettings();
+    fetchLayouts();
+  }, []);
 
   return (
-    <form className="form-container" onSubmit={getTeams}>
+    <form className="form-container">
       <div className="form-title">
         <h3>Match</h3>
       </div>
@@ -156,15 +165,15 @@ function MatchSelectionForm({
           <div className="inline">
             <label htmlFor="year">Year:</label>
             <div id="year" className="span--white">
-              {year}
+              {settings?.CURRENT_YEAR}
             </div>
             <label htmlFor="district">District:</label>
             <div id="district" className="span--white">
-              {district}
+              {settings?.DISTRICT}
             </div>
             <label htmlFor="event-code">Event Code:</label>
             <div id="event-code" className="span--white">
-              {eventCode}
+              {settings?.CURRENT_EVENT_CODE}
             </div>
           </div>
           <div className="inline">
@@ -173,7 +182,7 @@ function MatchSelectionForm({
               name="matchNumber"
               id="match-number"
               value={matchNumber}
-              onChange={(e) => setMatchNumber(e.target.value)}
+              onChange={(e) => updateMatchNumber(e.target.value)}
             >
               <option key="blank" value="">
                 Select
@@ -204,12 +213,25 @@ function MatchSelectionForm({
                 Playoff
               </option>
             </select>
+            <label htmlFor="layout">Layout: </label>
+            <select
+              name="layout"
+              id="layout"
+              value={layout?.id}
+              onChange={(e) => updateLayout(e.target.value)}
+            >
+              <option key="blank" value="">
+                Select
+              </option>
+              {layouts.map((layout) => (
+                <option key={layout.name} value={layout?.id}>
+                  {layout.name}
+                </option>
+              ))}
+            </select>
+            <label>LayoutID:</label>
+            <div>{layout?.id}</div>
           </div>
-        </div>
-        <div>
-          <button className="button--orange" type="submit">
-            Find Match
-          </button>
         </div>
       </div>
       <div className="form-footer">
