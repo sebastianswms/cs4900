@@ -25,9 +25,18 @@ const blankTeam = [
 
 export default function AllianceSelectionPage() {
   const [teamData, setTeamData] = useState(blankTeam);
+  const [scores, setScores] = useState(null);
   const [optionsArray, setOptionsArray] = useState([]);
-  const [layout, setLayout] = useState({ categories: ["", "", "", "", ""] });
-  const [settings, setSettings] = useState({});
+  const [layout, setLayout] = useState({
+    categories: ["", "", "", "", ""],
+    subCategories0: [],
+    subCategories1: [],
+    subCategories2: [],
+    subCategories3: [],
+    subCategories4: [],
+  });
+  const [settings, setSettings] = useState(null);
+  const [teamNumbers, setTeamNumbers] = useState([]);
 
   const fetchConfig = async () => {
     try {
@@ -47,8 +56,10 @@ export default function AllianceSelectionPage() {
       try {
         const results = await window.database.findAllByObject("scores", {
           layoutID: layout.id,
+          eventCode: "misjo",
         });
-        console.log(results); //*****remove*****
+        const parsedResults = parseScores(results);
+        setScores(parsedResults);
       } catch (err) {
         //setError(err.message);
         console.log(err);
@@ -67,8 +78,8 @@ export default function AllianceSelectionPage() {
         const results = await window.database.findByObject("layouts", {
           name: settings?.LAYOUT,
         });
-        setLayout({ ...results });
-        console.log(layout);
+        const parsedResults = parseLayout(results);
+        setLayout(parsedResults);
       } catch (err) {
         //setError(err.message);
         console.log(err);
@@ -81,6 +92,16 @@ export default function AllianceSelectionPage() {
   useEffect(() => {
     fetchConfig();
   }, []);
+
+  useEffect(() => {
+    console.log("label", layout, scores);
+    if (scores === null) {
+      return;
+    }
+    const mergedData = mergeData(layout, scores);
+    setTeamData(mergedData);
+    setTeamNumbers(mergedData.map((item) => item.team)); // Calculate team numbers here
+  }, [scores]);
 
   const sortTable = (group, index) => {
     const sorted = teamData.toSorted((a, b) => {
@@ -107,62 +128,70 @@ export default function AllianceSelectionPage() {
   };
 
   function parseLayout(layout) {
-    layout.categories = JSON.parse(layout.categories);
-
-    for (let i = 0; i < 5; i++) {
-      const subCategoryKey = `subCategories${i}`;
-      if (layout.hasOwnProperty(subCategoryKey) && layout[subCategoryKey]) {
-        layout[subCategoryKey] = JSON.parse(layout[subCategoryKey]);
-      }
-    }
-
-    for (let i = 0; i < 5; i++) {
-      const headerKey = `headers${i}`;
-      if (layout.hasOwnProperty(headerKey) && layout[headerKey]) {
-        layout[headerKey] = JSON.parse(layout[headerKey]);
-      }
-    }
-
-    return layout;
+    const parsedLayout = {
+      id: layout.id,
+      name: layout.name,
+      eventCode: layout.eventCode,
+      teamNumber: layout.teamNumber,
+      teamName: layout.teamName,
+      categories: JSON.parse(layout.categories),
+      subCategories0: JSON.parse(layout.subCategories0),
+      subCategories1: JSON.parse(layout.subCategories1),
+      subCategories2: JSON.parse(layout.subCategories2),
+      subCategories3: JSON.parse(layout.subCategories3),
+      subCategories4: JSON.parse(layout.subCategories4),
+    };
+    return parsedLayout;
   }
 
-  function parseScores(scores) {
-    return scores.map((score) => {
-      Object.keys(score).forEach((key) => {
-        if (Array.isArray(score[key]) && typeof score[key][0] === "string") {
-          score[key] = score[key].map((value) => JSON.parse(value));
-        }
-      });
-      return score;
-    });
+  function parseScores(inputList) {
+    const parsedScores = inputList.map((item) => ({
+      id: item.id,
+      layoutID: item.layoutID,
+      year: item.year,
+      eventCode: item.eventCode,
+      teamNumber: parseInt(item.teamNumber),
+      teamName: item.teamName,
+      data0: JSON.parse(item.data0),
+      data1: JSON.parse(item.data1),
+      data2: JSON.parse(item.data2),
+      data3: JSON.parse(item.data3),
+      data4: JSON.parse(item.data4),
+    }));
+
+    return parsedScores;
   }
 
-  function parseTeamData(parsedScores, parsedLayout) {
-    return parsedScores.map((score) => {
-      const teamData = {};
+  function mergeData(parsedLayout, parsedScores) {
+    console.log("Parsed Layout:", parsedLayout);
+    if (parsedScores === undefined) {
+      return;
+    }
+    const mergedData = [];
 
-      Object.keys(parsedLayout).forEach((key) => {
-        if (key !== "tableName" && key !== "columns") {
-          teamData[key] = parsedLayout[key];
-        }
-      });
+    parsedScores.forEach((score) => {
+      console.log("Score:", score);
+      console.log("Parsed Layout:", parsedLayout);
+      const mergedItem = {
+        team: score.teamNumber,
+        name: score.teamName,
+      };
 
-      parsedLayout.columns.forEach((column) => {
-        if (column.name.startsWith("data")) {
-          const groupIndex = parseInt(column.name.substring(4));
-          const groupLabel = parsedLayout.categories[groupIndex];
-          const groupData = score[column.name];
+      for (let i = 0; i < parsedLayout.categories.length; i++) {
+        const category = parsedLayout.categories[i];
+        const subCategories = parsedLayout[`subCategories${i}`];
+        const data = score[`data${i}`];
 
-          teamData[`group${groupIndex}Label`] = groupLabel;
-          teamData[`group${groupIndex}Data`] = {
-            labels: groupData.labels,
-            data: groupData.data,
-          };
-        }
-      });
+        mergedItem[`group${i}Label`] = category;
+        mergedItem[`group${i}Data`] = {
+          labels: subCategories,
+          data: data,
+        };
+      }
 
-      return teamData;
+      mergedData.push(mergedItem);
     });
+    return mergedData;
   }
 
   return (
@@ -176,39 +205,43 @@ export default function AllianceSelectionPage() {
             <h1>Alliance Selection</h1>
           </div>
         </div>
-        {/* <div className="team-table-container">
-          <TeamSortableTable
-            teamData={teamData}
-            group={"group0Data"}
-            category={layout.categories[0]}
-            sortTable={sortTable}
-            nameSort={nameSortTable}
-          />
-          <SortableTable
-            teamData={teamData}
-            group={"group1Data"}
-            category={layout.categories[1]}
-            sortTable={sortTable}
-          />
-          <SortableTable
-            teamData={teamData}
-            group={"group2Data"}
-            category={layout.categories[2]}
-            sortTable={sortTable}
-          />
-          <SortableTable
-            teamData={teamData}
-            group={"group3Data"}
-            category={layout.categories[3]}
-            sortTable={sortTable}
-          />
-          <SortableTable
-            teamData={teamData}
-            group={"group3Data"}
-            category={layout.categories[4]}
-            sortTable={sortTable}
-          />
-        </div>
+        {layout?.name ? (
+          <div className="team-table-container">
+            <TeamSortableTable
+              teamData={teamData}
+              group={"group0Data"}
+              category={layout.categories[0]}
+              sortTable={sortTable}
+              nameSort={nameSortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group1Data"}
+              category={layout.categories[1]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group2Data"}
+              category={layout.categories[2]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group3Data"}
+              category={layout.categories[3]}
+              sortTable={sortTable}
+            />
+            <SortableTable
+              teamData={teamData}
+              group={"group4Data"}
+              category={layout.categories[4]}
+              sortTable={sortTable}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="print-button-container">
           <button className="print-button" onClick={() => window.print()}>
             Print
@@ -222,7 +255,7 @@ export default function AllianceSelectionPage() {
             <div className="center">
               <div className="forms-container">
                 <AllianceSelectionForm
-                  teamData={teamData}
+                  teamNumbers={teamNumbers} // Pass teamNumbers here
                   optionsArray={optionsArray}
                   setOptionsArray={setOptionsArray}
                 />
@@ -237,7 +270,8 @@ export default function AllianceSelectionPage() {
               </div>
             </div>
           </div>
-        </div> */}
+          <div></div>
+        </div>
       </div>
     </div>
   );
