@@ -33,7 +33,7 @@ function MatchTeamTable({ eventCode, matchNumber, redData, blueData }) {
         {redData.map((team, index) => {
           return (
             <tr className="table--blue" key={index}>
-              <td style={{ color: "red" }}>{`Red ${index + 1}`}</td>
+              <td style={{ color: "red" }}>{`Red${index + 1}`}</td>
               <td>{team.teamNumber}</td>
               <td
                 style={{
@@ -50,7 +50,7 @@ function MatchTeamTable({ eventCode, matchNumber, redData, blueData }) {
         {blueData.map((team, index) => {
           return (
             <tr className="table--blue" key={index}>
-              <td style={{ color: "blue" }}>{`Blue ${index + 1}`}</td>
+              <td style={{ color: "blue" }}>{`Blue${index + 1}`}</td>
               <td>{team.teamNumber}</td>
               <td
                 style={{
