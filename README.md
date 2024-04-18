@@ -24,6 +24,7 @@ Senior design project for the 5675 WiredCats.
 - Daniel Wilkins
 - Joshua Vattiprolu
 - Sebastian Smiley
+- Samin Al Mahi
 
 ## Coding languages used for application:
 
